@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:get/get.dart';
 import 'package:sprint/generated/assets.dart';
 import 'package:sprint/res/app_styles.dart';
 import 'package:sprint/res/colors.dart';
+import 'package:sprint/screens/home/tai_khoan_item.dart';
 import 'package:sprint/widgets/app_text.dart';
 import 'package:sprint/widgets/widget_handle.dart';
 
@@ -16,21 +18,17 @@ class HeaderHome extends StatefulWidget {
 }
 
 class _HeaderHomeState extends State<HeaderHome> {
-
-  bool value=true;
+  bool value = true;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top+10.sp,
-        left: 20.sp,
-        right: 20.sp,
-        bottom: 17.sp
-      ),
-      decoration: BoxDecoration(
-        color: AppColors.WHITE
-      ),
+          top: MediaQuery.of(context).padding.top + 10.sp,
+          left: 20.sp,
+          right: 20.sp,
+          bottom: 17.sp),
+      decoration: BoxDecoration(color: AppColors.WHITE),
       child: Row(
         children: [
           WidgetContainerImage(
@@ -45,7 +43,9 @@ class _HeaderHomeState extends State<HeaderHome> {
             'Trực tuyến',
             style: AppStyle.DEFAULT_16,
           ),
-          SizedBox(width: 10.sp,),
+          SizedBox(
+            width: 10.sp,
+          ),
           FlutterSwitch(
             width: 44.sp,
             height: 24.sp,
@@ -55,8 +55,10 @@ class _HeaderHomeState extends State<HeaderHome> {
             padding: 2.sp,
             activeColor: AppColors.WHITE,
             activeToggleColor: AppColors.green,
-            activeSwitchBorder: Border.all(width: 1,color: AppColors.colorBorder),
-            inactiveSwitchBorder: Border.all(width: 1,color: AppColors.colorBorder),
+            activeSwitchBorder:
+                Border.all(width: 1, color: AppColors.colorBorder),
+            inactiveSwitchBorder:
+                Border.all(width: 1, color: AppColors.colorBorder),
             showOnOff: false,
             onToggle: (val) {
               setState(() {
@@ -64,14 +66,126 @@ class _HeaderHomeState extends State<HeaderHome> {
               });
             },
           ),
-          SizedBox(width: 10.sp,),
-          SvgPicture.asset(
-            Assets.iconsIcMenu,
-            width: 24.sp,
-            height: 24.sp,
+          SizedBox(
+            width: 10.sp,
+          ),
+          InkWell(
+            onTap: menuPress,
+            child: SvgPicture.asset(
+              Assets.iconsIcMenu,
+              width: 24.sp,
+              height: 24.sp,
+            ),
           )
         ],
       ),
+    );
+  }
+
+  menuPress() {
+    List<TaiKhoanModel> arr = [
+      TaiKhoanModel(
+        icon: 'assets/icons/icThongTinCaNhan.svg',
+        title: 'Thông tin cá nhân'.tr,
+      ),
+      TaiKhoanModel(
+          icon: 'assets/icons/icThongBao.svg',
+          title: 'Thông báo'.tr,
+          rightText: '5+'),
+      TaiKhoanModel(
+        icon: 'assets/icons/icLichSu.svg',
+        title: 'Lịch sử vận chuyển'.tr,
+      ),
+      TaiKhoanModel(
+        icon: 'assets/icons/icDieuKhoan.svg',
+        title: 'Điều khoản chính sách'.tr,
+      ),
+      TaiKhoanModel(
+        icon: 'assets/icons/icDoiMatKhau.svg',
+        title: 'Đổi mật khẩu'.tr,
+      ),
+    ];
+    showModalBottomSheet(
+      backgroundColor: AppColors.WHITE,
+      context: context,
+      builder: (context) {
+        final viewPadding = MediaQuery.of(context).viewPadding;
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 16.sp),
+              decoration: BoxDecoration(color: AppColors.WHITE, boxShadow: [
+                BoxShadow(
+                    blurRadius: 10,
+                    color: AppColors.BLACK.withOpacity(0.05),
+                    offset: const Offset(0, 4),
+                    spreadRadius: 0)
+              ]),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 24.sp,
+                    height: 24.sp,
+                  ),
+                  Expanded(
+                      child: AppText(
+                    'Tài khoản'.tr,
+                    textAlign: TextAlign.center,
+                    style: AppStyle.DEFAULT_16
+                        .copyWith(fontWeight: FontWeight.w500),
+                  )),
+                  InkWell(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: SvgPicture.asset(
+                      'assets/icons/icClose.svg',
+                      width: 24.sp,
+                      height: 24.sp,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+                child: SingleChildScrollView(
+              child: Column(
+                children: List.generate(arr.length, (index) {
+                  return TaiKhoanItem(taiKhoanModel: arr[index]);
+                }),
+              ),
+            )),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.red1),
+                  borderRadius: BorderRadius.circular(5.sp)),
+              margin: EdgeInsets.only(
+                  bottom: viewPadding.bottom + 8.sp, left: 16.sp, right: 16.sp),
+              padding: EdgeInsets.symmetric(vertical: 12.sp),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    'assets/icons/icDangXuat.svg',
+                    width: 16.sp,
+                    height: 16.sp,
+                  ),
+                  SizedBox(
+                    width: 12.sp,
+                  ),
+                  AppText(
+                    'Đăng xuất'.tr,
+                    style: AppStyle.DEFAULT_18
+                        .copyWith(fontWeight: FontWeight.w500, height: 1.2),
+                  )
+                ],
+              ),
+            )
+          ],
+        );
+      },
     );
   }
 }
