@@ -9,4 +9,5 @@ abstract class Routes {
   static const register = '/register';
   static const forgotPass = '/forgotPass';
   static const resetPass = '/resetPass';
+  static const detailOrder = '/detailOrder';
 }
