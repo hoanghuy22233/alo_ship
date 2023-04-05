@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:sprint/screens/home/detail_order.dart';
+import 'package:sprint/screens/home/more_detail.dart';
 import 'package:sprint/screens/loading/splash.dart';
 import 'package:sprint/screens/login/fogot_pass.dart';
 import 'package:sprint/screens/login/login.dart';
@@ -24,6 +25,7 @@ class AppPages extends CommonPages {
         GetPage(name: Routes.forgotPass, page: () => const ForgotPass()),
         GetPage(name: Routes.resetPass, page: () => const ResetPass()),
         GetPage(name: Routes.detailOrder, page: () => const DetailOrder()),
+        GetPage(name: Routes.moreDetail, page: () => const MoreDetail()),
      ];
   }
 }

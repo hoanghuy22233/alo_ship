@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:sprint/common/routes/navigator.dart';
 import 'package:sprint/res/colors.dart';
 import 'package:sprint/widgets/DButton.dart';
 import 'package:sprint/widgets/app_base_page.dart';
@@ -46,38 +47,33 @@ class _DetailOrderState extends State<DetailOrder> {
           Expanded(child: Column(
             children: [
               SizedBox(height: 15.sp,),
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.sp),
-                    child: Row(
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.sp),
+                child: Row(
+                  children: [
+                    WidgetContainerImage(
+                      image: Assets.imagesImg1,
+                      width: 45.sp,
+                      height: 45.sp,
+                      fit: BoxFit.cover,
+                      borderRadius: BorderRadius.circular(10.sp),
+                    ),
+                    SizedBox(width: 15.sp,),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        WidgetContainerImage(
-                          image: Assets.imagesImg1,
-                          width: 45.sp,
-                          height: 45.sp,
-                          fit: BoxFit.cover,
-                          borderRadius: BorderRadius.circular(10.sp),
+                        AppText(
+                          'Đơn hàng giao hàng (Hỏa tốc)',
+                          style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500),
                         ),
-                        SizedBox(width: 15.sp,),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            AppText(
-                              'Đơn hàng giao hàng (Hỏa tốc)',
-                              style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500),
-                            ),
-                            AppText(
-                              'Cách bạn 1.3 km',
-                              style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w400,color: AppColors.grey7),
-                            )
-                          ],
+                        AppText(
+                          'Cách bạn 1.3 km',
+                          style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w400,color: AppColors.grey7),
                         )
                       ],
-                    ),
-                  ),
-
-                ],
+                    )
+                  ],
+                ),
               ),
               SizedBox(height: 15.sp,),
               Container(height: 1,color: AppColors.greyF2,width: Get.width,),
@@ -94,9 +90,14 @@ class _DetailOrderState extends State<DetailOrder> {
                           style: AppStyle.DEFAULT_16.copyWith(color: AppColors.blueText),
                         ),
                         Spacer(),
-                        AppText(
-                          'Xem chi tiết',
-                          style: AppStyle.DEFAULT_16.copyWith(color: AppColors.blueText,height: 1.3),
+                        InkWell(
+                          onTap: (){
+                            AppNavigator.navigateMoreDetail();
+                          },
+                          child: AppText(
+                            'Xem chi tiết',
+                            style: AppStyle.DEFAULT_16.copyWith(color: AppColors.blueText,height: 1.3),
+                          ),
                         ),
                         SizedBox(width: 5.sp,),
                         SvgPicture.asset(
