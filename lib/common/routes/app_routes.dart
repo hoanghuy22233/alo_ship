@@ -11,5 +11,6 @@ abstract class Routes {
   static const resetPass = '/resetPass';
   static const detailOrder = '/detailOrder';
   static const moreDetail = '/moreDetail';
+  static const thongTinCaNhan = '/thongTinCaNhan';
   static const historyTransfer = '/historyTransfer';
 }

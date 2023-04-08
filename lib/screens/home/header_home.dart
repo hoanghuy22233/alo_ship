@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:sprint/common/routes/navigator.dart';
+import 'package:sprint/common/routes/app_pages.dart';
 import 'package:sprint/generated/assets.dart';
 import 'package:sprint/res/app_styles.dart';
 import 'package:sprint/res/colors.dart';
@@ -88,6 +89,10 @@ class _HeaderHomeState extends State<HeaderHome> {
       TaiKhoanModel(
         icon: 'assets/icons/icThongTinCaNhan.svg',
         title: 'Thông tin cá nhân'.tr,
+        press: () {
+          Get.back();
+          Get.toNamed(Routes.thongTinCaNhan);
+        },
       ),
       TaiKhoanModel(
           icon: 'assets/icons/icThongBao.svg',
