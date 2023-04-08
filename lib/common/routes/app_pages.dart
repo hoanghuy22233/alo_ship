@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sprint/screens/history/history_transfer.dart';
+import 'package:sprint/screens/dieu_khoan_chinh_sach/dieu_khoan_chinh_sach.dart';
+import 'package:sprint/screens/doi_mat_khau/doi_mat_khau.dart';
 import 'package:sprint/screens/home/detail_order.dart';
 import 'package:sprint/screens/home/more_detail.dart';
 import 'package:sprint/screens/loading/splash.dart';
@@ -31,6 +33,8 @@ class AppPages extends CommonPages {
         GetPage(name: Routes.moreDetail, page: () => const MoreDetail()),
         GetPage(name: Routes.thongTinCaNhan, page: () => const ThongTinCaNhan()),
         GetPage(name: Routes.historyTransfer, page: () => const HistoryTransfer()),
+        GetPage(name: Routes.doiMatKhau, page: () => const DoiMatKhau()),
+        GetPage(name: Routes.dieuKhoanChinhSach, page: () => const DieuKhoanChinhSach()),
         GetPage(name: Routes.notification, page: () => const ThongBao()),
      ];
   }
