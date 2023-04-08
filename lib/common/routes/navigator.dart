@@ -12,4 +12,5 @@ class AppNavigator {
   static navigateResetPass() async => Get.toNamed(Routes.resetPass);
   static navigateDetailOrder() async => Get.toNamed(Routes.detailOrder);
   static navigateMoreDetail() async => Get.toNamed(Routes.moreDetail);
+  static navigateHistoryTransfer() async => Get.toNamed(Routes.historyTransfer);
 }

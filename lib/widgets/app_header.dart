@@ -17,7 +17,18 @@ class AppHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top+30.sp,bottom: 20.sp),
-      color: AppColors.WHITE,
+
+      decoration: BoxDecoration(
+          color: AppColors.WHITE,
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, 4),
+            blurRadius: 10,
+            spreadRadius: 0,
+            color: AppColors.BLACK.withOpacity(0.05)
+          )
+        ]
+      ),
       child: Row(
         children: [
           GestureDetector(

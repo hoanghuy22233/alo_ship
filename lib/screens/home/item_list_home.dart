@@ -26,7 +26,8 @@ class _ItemListHomeState extends State<ItemListHome> {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.WHITE
+          color: AppColors.WHITE,
+            borderRadius: BorderRadius.circular(5.sp)
         ),
         margin: EdgeInsets.only(bottom: 15.sp),
         padding: EdgeInsets.symmetric(vertical: 15.sp),

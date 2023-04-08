@@ -7,6 +7,7 @@ import 'package:sprint/res/colors.dart';
 import 'package:sprint/widgets/DButton.dart';
 import 'package:sprint/widgets/app_base_page.dart';
 import 'package:sprint/widgets/app_header.dart';
+import 'package:sprint/widgets/widget_dialog.dart';
 
 import '../../generated/assets.dart';
 import '../../res/app_styles.dart';
@@ -22,13 +23,16 @@ class DetailOrder extends StatefulWidget {
 }
 
 class _DetailOrderState extends State<DetailOrder> {
+  int type=1;
+
+
   @override
   Widget build(BuildContext context) {
     return AppBasePage(
       backgroundColor: AppColors.colorBg,
       bottomNavigationBar: Container(
         margin: EdgeInsets.only(left: 15.sp,right: 15.sp,bottom: 15.sp),
-        child: Row(
+        child:type==1? Row(
           children: [
             Expanded(child: DButton(
                 text: 'Hủy bỏ',
@@ -39,6 +43,11 @@ class _DetailOrderState extends State<DetailOrder> {
             SizedBox(width: 15.sp,),
             Expanded(child: DButton(text: 'Nhận đơn', onClick: this.onClickNhanDon)),
           ],
+        ):DButton(
+            text: type==2?'Lấy hàng thành công':'Giao hàng thành công',
+            textColor: AppColors.BLACK,
+            bgColor: AppColors.WHITE,
+            onClick: this.onClickLayDon
         ),
       ),
       child: Column(
@@ -269,5 +278,26 @@ class _DetailOrderState extends State<DetailOrder> {
   }
 
   onClickNhanDon() {
+    setState(() {
+      type=2;
+    });
+  }
+
+  onClickLayDon() {
+    if(type==2)
+    {
+      setState(() {
+        type=3;
+      });
+    }
+    else{
+      NotificationDialog.createSimpleDialog(
+          context: context,
+          titleButton1: 'Xác nhận',
+          titleButton2: "Hủy bỏ",
+          numberButton: 2,
+          content: 'Xác nhận giao hàng thành công'
+      );
+    }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sprint/screens/history/history_transfer.dart';
 import 'package:sprint/screens/home/detail_order.dart';
 import 'package:sprint/screens/home/more_detail.dart';
 import 'package:sprint/screens/loading/splash.dart';
@@ -26,6 +27,7 @@ class AppPages extends CommonPages {
         GetPage(name: Routes.resetPass, page: () => const ResetPass()),
         GetPage(name: Routes.detailOrder, page: () => const DetailOrder()),
         GetPage(name: Routes.moreDetail, page: () => const MoreDetail()),
+        GetPage(name: Routes.historyTransfer, page: () => const HistoryTransfer()),
      ];
   }
 }
