@@ -13,4 +13,6 @@ abstract class Routes {
   static const moreDetail = '/moreDetail';
   static const thongTinCaNhan = '/thongTinCaNhan';
   static const historyTransfer = '/historyTransfer';
+  static const doiMatKhau = '/doiMatKhau';
+  static const dieuKhoanChinhSach = '/dieuKhoanChinhSach';
 }

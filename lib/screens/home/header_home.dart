@@ -108,10 +108,18 @@ class _HeaderHomeState extends State<HeaderHome> {
       TaiKhoanModel(
         icon: 'assets/icons/icDieuKhoan.svg',
         title: 'Điều khoản chính sách'.tr,
+        press: () {
+          Get.back();
+          Get.toNamed(Routes.dieuKhoanChinhSach);
+        },
       ),
       TaiKhoanModel(
         icon: 'assets/icons/icDoiMatKhau.svg',
         title: 'Đổi mật khẩu'.tr,
+        press: () {
+          Get.back();
+          Get.toNamed(Routes.doiMatKhau);
+        },
       ),
     ];
     showModalBottomSheet(
