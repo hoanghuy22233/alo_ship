@@ -13,4 +13,5 @@ abstract class Routes {
   static const moreDetail = '/moreDetail';
   static const thongTinCaNhan = '/thongTinCaNhan';
   static const historyTransfer = '/historyTransfer';
+  static const notification = '/notification';
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sprint/common/routes/navigator.dart';
 import 'package:sprint/generated/assets.dart';
@@ -25,13 +26,25 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return AppBasePage(
-      child: Center(
-        child: WidgetContainerImage(
-          image: Assets.imagesBgLogin,
-          width: Get.width,
-          height: Get.height,
-          fit: BoxFit.fill,
-        ),
+      child: Stack(
+        children: [
+          WidgetContainerImage(
+            image: Assets.imagesBgSplash,
+            width: Get.width,
+            height: Get.height,
+            fit: BoxFit.fill,
+          ),
+          Positioned.fill(
+            child: Center(
+              child: WidgetContainerImage(
+                image: Assets.imagesLogo,
+                width: Get.width/2,
+                height: 150.sp,
+                fit: BoxFit.contain,
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

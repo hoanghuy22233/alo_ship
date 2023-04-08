@@ -16,7 +16,7 @@ class AppHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top+30.sp,bottom: 20.sp),
+      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top+20.sp,bottom: 16.sp),
 
       decoration: BoxDecoration(
           color: AppColors.WHITE,

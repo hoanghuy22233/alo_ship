@@ -97,14 +97,18 @@ class _HeaderHomeState extends State<HeaderHome> {
       TaiKhoanModel(
           icon: 'assets/icons/icThongBao.svg',
           title: 'Thông báo'.tr,
-          rightText: '5+'),
+          rightText: '5+',
+          press: () {
+            Get.back();
+            AppNavigator.navigateNotification();
+          }),
       TaiKhoanModel(
-        icon: 'assets/icons/icLichSu.svg',
-        title: 'Lịch sử vận chuyển'.tr,
-        press:(){
-          AppNavigator.navigateHistoryTransfer();
-        }
-      ),
+          icon: 'assets/icons/icLichSu.svg',
+          title: 'Lịch sử vận chuyển'.tr,
+          press: () {
+            Get.back();
+            AppNavigator.navigateHistoryTransfer();
+          }),
       TaiKhoanModel(
         icon: 'assets/icons/icDieuKhoan.svg',
         title: 'Điều khoản chính sách'.tr,

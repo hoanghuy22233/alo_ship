@@ -28,6 +28,8 @@ class Assets {
   static const String imagesBgLogin = 'assets/images/bg_login.png';
   static const String imagesBgSplash = 'assets/images/bg_splash.png';
   static const String imagesImg1 = 'assets/images/img1.png';
+  static const String imagesImgCar = 'assets/images/img_car.png';
+  static const String imagesLogo = 'assets/images/logo.png';
   static const String lottiesDone = 'assets/lotties/done.json';
   static const String lottiesFail = 'assets/lotties/fail.json';
   static const String lottiesLoading = 'assets/lotties/loading.json';

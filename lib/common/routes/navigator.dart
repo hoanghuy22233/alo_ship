@@ -13,4 +13,5 @@ class AppNavigator {
   static navigateDetailOrder() async => Get.toNamed(Routes.detailOrder);
   static navigateMoreDetail() async => Get.toNamed(Routes.moreDetail);
   static navigateHistoryTransfer() async => Get.toNamed(Routes.historyTransfer);
+  static navigateNotification() async => Get.toNamed(Routes.notification);
 }

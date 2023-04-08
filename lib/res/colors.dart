@@ -8,6 +8,7 @@ class AppColors {
 
   static final gray =const Color(0xffb4b4b4);
   static final grey7 =const Color(0xff777777);
+  static final grey3 =const Color(0xff333333);
   static final colorBorder =const Color(0xffD8D9DB);
   static final blue1 =const Color(0xff006DE0);
   static final blue2 =const Color(0xff0C3159);
