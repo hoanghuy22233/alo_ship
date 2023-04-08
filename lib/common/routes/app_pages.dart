@@ -6,6 +6,7 @@ import 'package:sprint/screens/login/fogot_pass.dart';
 import 'package:sprint/screens/login/login.dart';
 import 'package:sprint/screens/login/register.dart';
 import 'package:sprint/screens/login/reset_pass.dart';
+import 'package:sprint/screens/thong_tin_ca_nhan/thong_tin_ca_nhan.dart';
 import '../../screens/home/home_page.dart';
 
 import 'common_pages.dart';
@@ -26,6 +27,7 @@ class AppPages extends CommonPages {
         GetPage(name: Routes.resetPass, page: () => const ResetPass()),
         GetPage(name: Routes.detailOrder, page: () => const DetailOrder()),
         GetPage(name: Routes.moreDetail, page: () => const MoreDetail()),
+        GetPage(name: Routes.thongTinCaNhan, page: () => const ThongTinCaNhan()),
      ];
   }
 }
