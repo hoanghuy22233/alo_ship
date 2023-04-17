@@ -7,12 +7,14 @@ part of 'base_response.dart';
 // **************************************************************************
 
 BaseResponse _$BaseResponseFromJson(Map<String, dynamic> json) => BaseResponse(
-      statusCode: json['statusCode'] as int?,
-      errorMessage: json['errorMessage'] as String?,
+      code: json['code'] as int?,
+      message: json['message'] as String?,
+      datetime: json['datetime'] as int?,
     );
 
 Map<String, dynamic> _$BaseResponseToJson(BaseResponse instance) =>
     <String, dynamic>{
-      'statusCode': instance.statusCode,
-      'errorMessage': instance.errorMessage,
+      'code': instance.code,
+      'message': instance.message,
+      'datetime': instance.datetime,
     };

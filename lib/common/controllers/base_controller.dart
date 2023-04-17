@@ -35,7 +35,7 @@ class BaseController extends GetxController implements WebServiceAPICallback {
     webServiceStateController.pushLoading(childLoading: childLoading);
     try {
       var result = await api;
-      int code = jsonDecode(jsonEncode(result))['statusCode'];
+      int code = jsonDecode(jsonEncode(result))['code'];
       print("statusCodeResponse ${code}");
       if (code == 0) {
         print("responseData ${jsonDecode(jsonEncode(result))}");
@@ -45,7 +45,7 @@ class BaseController extends GetxController implements WebServiceAPICallback {
       }
       else {
         webServiceStateController.popLoading();
-        String message = jsonDecode(jsonEncode(result))['errorMessage'];
+        String message = jsonDecode(jsonEncode(result))['message'];
         await NotificationDialog.createSimpleDialog(
             context: Get.context!,
             titleButton1: "OK",

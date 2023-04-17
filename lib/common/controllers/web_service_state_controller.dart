@@ -18,7 +18,7 @@ class WebServiceStateController extends GetxController {
         color: Colors.transparent,
         child: GestureDetector(
           onTap: () {},
-          child: Center(child: Lottie.asset('assets/lotties/loading.json',width: Get.width,height: 200.sp,fit: BoxFit.contain)),
+          child: Center(child: Lottie.asset('assets/lotties/loading.json',width: Get.width/2,height: 80.sp,fit: BoxFit.contain)),
         ),
       ));
     }

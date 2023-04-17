@@ -9,6 +9,7 @@ class DInput extends StatelessWidget {
       required this.hintText,
       required this.controller,
       this.isPass = false,
+        this.readOnly=false,
       this.rightPadding})
       : super(key: key);
 
@@ -16,6 +17,7 @@ class DInput extends StatelessWidget {
   TextEditingController controller;
   bool isPass;
   double? rightPadding;
+  bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class DInput extends StatelessWidget {
       borderRadius: BorderRadius.circular(5.sp),
       child: Container(
         decoration: BoxDecoration(
-            color: AppColors.WHITE,
+            color:readOnly?AppColors.greyE6: AppColors.WHITE,
             // borderRadius: BorderRadius.circular(5.sp),
             border:
                 Border(bottom: BorderSide(width: 1, color: AppColors.greyC4)),
@@ -44,6 +46,7 @@ class DInput extends StatelessWidget {
                   right: rightPadding ?? 20.sp,
                   left: 20.sp),
               hintText: hintText,
+              enabled: !readOnly,
               border: InputBorder.none,
               hintStyle: AppStyle.DEFAULT_16.copyWith(color: AppColors.grey7)),
           style: AppStyle.DEFAULT_16,

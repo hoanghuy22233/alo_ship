@@ -4,10 +4,12 @@ import 'package:get/get.dart';
 import 'package:sprint/common/routes/navigator.dart';
 import 'package:sprint/generated/assets.dart';
 import 'package:sprint/res/app_styles.dart';
+import 'package:sprint/screens/login/controllers/login_controller.dart';
 import 'package:sprint/widgets/DButton.dart';
 import 'package:sprint/widgets/DInput.dart';
 import 'package:sprint/widgets/app_base_page.dart';
 import 'package:sprint/widgets/app_text.dart';
+import 'package:sprint/widgets/widget_dialog.dart';
 import 'package:sprint/widgets/widget_handle.dart';
 
 import '../../res/colors.dart';
@@ -20,31 +22,34 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passController = TextEditingController();
 
-  TextEditingController _emailController=TextEditingController();
-  TextEditingController _passController=TextEditingController();
+  LoginController _loginController = Get.find<LoginController>();
 
   @override
   Widget build(BuildContext context) {
     return AppBasePage(
       backgroundColor: AppColors.blue1.withOpacity(0.03),
-      bottomNavigationBar:  Container(
+      bottomNavigationBar: Container(
         color: AppColors.blue1.withOpacity(0.03),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          AppText(
-            'Alo ship',
-            style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500),
-          ),
-          AppText(
-            'Version: 1.0.0',
-            style: AppStyle.DEFAULT_14.copyWith(fontWeight: FontWeight.w400),
-          ),
-          SizedBox(height: 24.sp,)
-        ],
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AppText(
+              'Alo ship',
+              style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500),
+            ),
+            AppText(
+              'Version: 1.0.0',
+              style: AppStyle.DEFAULT_14.copyWith(fontWeight: FontWeight.w400),
+            ),
+            SizedBox(
+              height: 24.sp,
+            )
+          ],
+        ),
       ),
-    ),
       child: SizedBox(
         height: Get.height,
         child: SingleChildScrollView(
@@ -53,11 +58,14 @@ class _LoginState extends State<Login> {
               WidgetContainerImage(
                 image: Assets.imagesBgLogin,
                 width: Get.width,
-                height: Get.height*(300/896),
+                height: Get.height * (300 / 896),
                 fit: BoxFit.cover,
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50.sp)),
+                borderRadius:
+                    BorderRadius.only(bottomLeft: Radius.circular(50.sp)),
               ),
-              SizedBox(height: 35.sp,),
+              SizedBox(
+                height: 35.sp,
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.sp),
                 child: Column(
@@ -67,31 +75,43 @@ class _LoginState extends State<Login> {
                       textAlign: TextAlign.center,
                       style: AppStyle.DEFAULT_16,
                     ),
-                    SizedBox(height: 20.sp,),
+                    SizedBox(
+                      height: 20.sp,
+                    ),
                     DInput(
                       hintText: 'Email của bạn'.tr,
                       controller: _emailController,
                     ),
-                    SizedBox(height: 15.sp,),
+                    SizedBox(
+                      height: 15.sp,
+                    ),
                     DInput(
                       hintText: 'Nhập mật khẩu'.tr,
                       controller: _passController,
                       isPass: true,
                     ),
-                    SizedBox(height: 20.sp,),
+                    SizedBox(
+                      height: 20.sp,
+                    ),
                     InkWell(
                       onTap: this.onClickQuenPass,
                       child: AppText(
                         'Quên mật khẩu'.tr,
-                        style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w600,color: AppColors.blue1),
+                        style: AppStyle.DEFAULT_16.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.blue1),
                       ),
                     ),
-                    SizedBox(height: 20.sp,),
+                    SizedBox(
+                      height: 20.sp,
+                    ),
                     DButton(
                       text: 'Đăng nhập'.tr,
                       onClick: this.onClickDangNhap,
                     ),
-                    SizedBox(height: 24.sp,),
+                    SizedBox(
+                      height: 24.sp,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -103,7 +123,9 @@ class _LoginState extends State<Login> {
                           onTap: this.onClickDangKy,
                           child: AppText(
                             ' Đăng ký'.tr,
-                            style: AppStyle.DEFAULT_16.copyWith(color: AppColors.blue1,fontWeight: FontWeight.w500),
+                            style: AppStyle.DEFAULT_16.copyWith(
+                                color: AppColors.blue1,
+                                fontWeight: FontWeight.w500),
                           ),
                         ),
                       ],
@@ -111,7 +133,6 @@ class _LoginState extends State<Login> {
                   ],
                 ),
               ),
-
             ],
           ),
         ),
@@ -120,7 +141,18 @@ class _LoginState extends State<Login> {
   }
 
   onClickDangNhap() {
-    AppNavigator.navigateHome();
+    if (_emailController.text != "" && _passController != "") {
+      _loginController.login(
+          email: _emailController.text, password: _passController.text);
+    } else {
+      NotificationDialog.createSimpleDialog(
+          context: context,
+          titleButton1: 'OK',
+          numberButton: 1,
+          type: 2,
+          content: 'Bạn chưa nhập đủ thông tin'
+      );
+    }
   }
 
   void onClickDangKy() {

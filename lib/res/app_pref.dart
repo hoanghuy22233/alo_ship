@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppPref extends Pref {
-  static const String auth_token = "auth_token";
+  static const String auth_token = "TOKEN";
   static const String language = "app_language";
   static const String theme = "app_theme";
   static const String is_first_run = "is_first_run";
@@ -26,6 +26,12 @@ class AppPref extends Pref {
   Future<bool?> getBool(String key) async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool(key.toString());
+  }
+
+  @override
+  Future<bool?> removeString(String key) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.remove(key.toString());
   }
 }
 

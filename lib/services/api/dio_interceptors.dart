@@ -22,7 +22,7 @@ class AppDioInterceptor extends Interceptor {
     var prefs = AppPref();
     var token = await prefs.getString(AppPref.auth_token);
     if (token != null) {
-      options.headers.putIfAbsent('Authorization', () => '$tokenPrefix$token');
+      options.headers.putIfAbsent('Authorization', () => 'Bearer $token');
     } else {
       print('-----Auth token is null-----');
     }

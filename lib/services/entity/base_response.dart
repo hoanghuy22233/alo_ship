@@ -4,10 +4,11 @@ part 'base_response.g.dart';
 
 @JsonSerializable()
 class BaseResponse {
-  int? statusCode;
-  String? errorMessage;
+  int? code;
+  String? message;
+  int? datetime;
 
-  BaseResponse({this.statusCode, this.errorMessage});
+  BaseResponse({this.code, this.message,this.datetime});
 
   factory BaseResponse.fromJson(Map<String, dynamic> json) =>
       _$BaseResponseFromJson(json);

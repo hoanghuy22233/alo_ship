@@ -6,10 +6,12 @@ import 'package:get/get.dart';
 import 'package:sprint/common/routes/navigator.dart';
 import 'package:sprint/common/routes/app_pages.dart';
 import 'package:sprint/generated/assets.dart';
+import 'package:sprint/res/app_pref.dart';
 import 'package:sprint/res/app_styles.dart';
 import 'package:sprint/res/colors.dart';
 import 'package:sprint/screens/home/tai_khoan_item.dart';
 import 'package:sprint/widgets/app_text.dart';
+import 'package:sprint/widgets/widget_dialog.dart';
 import 'package:sprint/widgets/widget_handle.dart';
 
 class HeaderHome extends StatefulWidget {
@@ -178,30 +180,46 @@ class _HeaderHomeState extends State<HeaderHome> {
                 }),
               ),
             )),
-            Container(
-              decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.red1),
-                  borderRadius: BorderRadius.circular(5.sp)),
-              margin: EdgeInsets.only(
-                  bottom: viewPadding.bottom + 8.sp, left: 16.sp, right: 16.sp),
-              padding: EdgeInsets.symmetric(vertical: 12.sp),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    'assets/icons/icDangXuat.svg',
-                    width: 16.sp,
-                    height: 16.sp,
-                  ),
-                  SizedBox(
-                    width: 12.sp,
-                  ),
-                  AppText(
-                    'Đăng xuất'.tr,
-                    style: AppStyle.DEFAULT_18
-                        .copyWith(fontWeight: FontWeight.w500, height: 1.2),
-                  )
-                ],
+            InkWell(
+              onTap: ()async{
+                NotificationDialog.createSimpleDialog(
+                    context: context,
+                    titleButton1: 'OK',
+                    titleButton2: "Hủy",
+                    onTap1: ()async{
+                      Get.back();
+                      await AppPref().removeString('TOKEN');
+                      AppNavigator.navigateLogin();
+                    },
+                    content: "Bạn có chắc chắn muốn đăng xuất không?",
+                    numberButton: 2
+                );
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.red1),
+                    borderRadius: BorderRadius.circular(5.sp)),
+                margin: EdgeInsets.only(
+                    bottom: viewPadding.bottom + 8.sp, left: 16.sp, right: 16.sp),
+                padding: EdgeInsets.symmetric(vertical: 12.sp),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/icons/icDangXuat.svg',
+                      width: 16.sp,
+                      height: 16.sp,
+                    ),
+                    SizedBox(
+                      width: 12.sp,
+                    ),
+                    AppText(
+                      'Đăng xuất'.tr,
+                      style: AppStyle.DEFAULT_18
+                          .copyWith(fontWeight: FontWeight.w500, height: 1.2),
+                    )
+                  ],
+                ),
               ),
             )
           ],
