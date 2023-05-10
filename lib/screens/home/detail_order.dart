@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:sprint/common/routes/navigator.dart';
 import 'package:sprint/res/colors.dart';
 import 'package:sprint/screens/home/controllers/detail_controller.dart';
+import 'package:sprint/screens/home/controllers/home_controller.dart';
 import 'package:sprint/screens/home/form_confirm.dart';
 import 'package:sprint/services/entity/detail_booking_response.dart';
 import 'package:sprint/widgets/DButton.dart';
@@ -30,6 +31,7 @@ class _DetailOrderState extends State<DetailOrder> {
   int type=1;
   DetailController _detailController=Get.find<DetailController>();
   String booking_code=Get.arguments;
+  HomeController _homeController=Get.find<HomeController>();
 
 
   @override
@@ -285,7 +287,8 @@ class _DetailOrderState extends State<DetailOrder> {
                   shipping_fee: sotien,
                   onSuccess: (){
                     Get.back();
-
+                    Get.back();
+                    AppNavigator.navigateHistoryTransfer();
                   }
               );
             },

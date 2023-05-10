@@ -6,6 +6,7 @@ import 'package:sprint/common/routes/navigator.dart';
 import 'package:sprint/res/app_styles.dart';
 import 'package:sprint/res/colors.dart';
 import 'package:sprint/screens/history/controllers/history_controller.dart';
+import 'package:sprint/screens/home/controllers/home_controller.dart';
 import 'package:sprint/services/entity/history_booking_response.dart';
 import 'package:sprint/widgets/app_base_page.dart';
 import 'package:sprint/widgets/app_header.dart';
@@ -26,6 +27,7 @@ class _HistoryTransferState extends State<HistoryTransfer> with SingleTickerProv
   TabController? _tabController;
   int indexTab=0;
   HistoryController _historyController=Get.find<HistoryController>();
+  HomeController _homeController=Get.find<HomeController>();
 
   @override
   void initState() {
@@ -41,7 +43,10 @@ class _HistoryTransferState extends State<HistoryTransfer> with SingleTickerProv
       backgroundColor: AppColors.colorBg,
       child: Column(
         children: [
-          AppHeader(title: 'Lịch sử vận chuyển'),
+          AppHeader(title: 'Lịch sử vận chuyển',onBack: (){
+            AppNavigator.navigateHome();
+            _homeController.listBooking();
+          },),
           // _renderTopTab(),
           // Expanded(child: TabBarView(
           //   controller: _tabController,
