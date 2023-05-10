@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:sprint/res/colors.dart';
+import 'package:sprint/services/entity/detail_booking_response.dart';
 import 'package:sprint/widgets/app_base_page.dart';
 import 'package:sprint/widgets/app_header.dart';
 
@@ -19,6 +21,8 @@ class MoreDetail extends StatefulWidget {
 }
 
 class _MoreDetailState extends State<MoreDetail> {
+  DetailBookingData dataDetail=Get.arguments;
+
   @override
   Widget build(BuildContext context) {
     return AppBasePage(
@@ -47,11 +51,11 @@ class _MoreDetailState extends State<MoreDetail> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             AppText(
-                              'Đơn hàng giao hàng (Hỏa tốc)',
+                              dataDetail.booking_name??'',
                               style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500),
                             ),
                             AppText(
-                              'Cách bạn 1.3 km',
+                              'Cách bạn ${dataDetail.distance!.toStringAsFixed(1)} km',
                               style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w400,color: AppColors.grey7),
                             )
                           ],
@@ -78,10 +82,9 @@ class _MoreDetailState extends State<MoreDetail> {
                     margin: EdgeInsets.symmetric(horizontal: 16.sp),
                     child: Column(
                       children: [
-                        itemAddress('Điểm đi','120 Nguyễn Trãi, Thanh Xuân, Hà Nội'),
+                        itemAddress('Điểm đi',dataDetail.location_from??'Chưa có'),
                         DLine(),
-                        itemAddress('Điểm đến','120 Nguyễn Trãi, Thanh Xuân, Hà Nội',hasLine: true,type: 2),
-                        itemAddress('Điểm đến','120 Nguyễn Trãi, Thanh Xuân, Hà Nội',hasLine: true,type: 2),
+                        itemAddress('Điểm đến',dataDetail.location_to??'Chưa có',hasLine: true,type: 2)
                       ],
                     ),
                   ),
@@ -102,41 +105,40 @@ class _MoreDetailState extends State<MoreDetail> {
                     margin: EdgeInsets.symmetric(horizontal: 16.sp,vertical: 15.sp),
                     child: Column(
                       children: [
-                        itemInfo(title: 'Tên người nhận', content: 'Hoàng Huy'),
-                        itemInfo(title: 'Số điện thoại', content: '0966123456'),
-                        itemInfo(title: 'Ứng tiền', content: '500.000 vnđ',isBold: true,textColor: AppColors.primary),
+                        itemInfo(title: 'Tên người nhận', content: dataDetail.receiver_name??''),
+                        itemInfo(title: 'Số điện thoại', content: dataDetail.receiver_phone??'')
                       ],
                     ),
                   ),
                   _thongTinNguoiDat(),
                   DLine(),
                   SizedBox(height: 15.sp,),
-                  _thongTinVanChuyen(),
-                  DLine(),
-                  SizedBox(height: 15.sp,),
-                  Container(
-                    margin: EdgeInsets.only(left: 16.sp,right: 16.sp,bottom: 18.sp),
-                    padding: EdgeInsets.all(15.sp),
-                    decoration: BoxDecoration(
-                        color: AppColors.WHITE,
-                      border: Border.all(width: 1,color: AppColors.primary),
-                      borderRadius: BorderRadius.circular(5.sp)
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: AppText(
-                            'Thu tiền mặt',
-                            style: AppStyle.DEFAULT_16,
-                          ),
-                        ),
-                        AppText(
-                          '510.000 vnđ',
-                          style: AppStyle.DEFAULT_18.copyWith(fontWeight: FontWeight.w500,color: AppColors.primary),
-                        )
-                      ],
-                    ),
-                  )
+                  // _thongTinVanChuyen(),
+                  // DLine(),
+                  // SizedBox(height: 15.sp,),
+                  // Container(
+                  //   margin: EdgeInsets.only(left: 16.sp,right: 16.sp,bottom: 18.sp),
+                  //   padding: EdgeInsets.all(15.sp),
+                  //   decoration: BoxDecoration(
+                  //       color: AppColors.WHITE,
+                  //     border: Border.all(width: 1,color: AppColors.primary),
+                  //     borderRadius: BorderRadius.circular(5.sp)
+                  //   ),
+                  //   child: Row(
+                  //     children: [
+                  //       Expanded(
+                  //         child: AppText(
+                  //           'Thu tiền mặt',
+                  //           style: AppStyle.DEFAULT_16,
+                  //         ),
+                  //       ),
+                  //       AppText(
+                  //         '510.000 vnđ',
+                  //         style: AppStyle.DEFAULT_18.copyWith(fontWeight: FontWeight.w500,color: AppColors.primary),
+                  //       )
+                  //     ],
+                  //   ),
+                  // )
                 ],
               ),
             ),
@@ -233,16 +235,16 @@ class _MoreDetailState extends State<MoreDetail> {
             style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500),
           ),
           SizedBox(height: 15.sp,),
-          itemInfo2(title: 'Tên người đặt', content: 'Huy Hoàng'),
+          itemInfo2(title: 'Tên người đặt', content: dataDetail.orderer_name??''),
           SizedBox(height: 15.sp,),
-          itemInfo2(title: 'Số điện thoại', content: '0966123456'),
+          itemInfo2(title: 'Số điện thoại', content: dataDetail.orderer_user_phone??''),
           SizedBox(height: 15.sp,),
           itemInfo2(title: 'Phí vận chuyển', content: 'Người nhận trả'),
           SizedBox(height: 15.sp,),
-          itemInfo2(title: 'Ghi chú', content: ''),
+          itemInfo2(title: 'Ghi chú', content:''),
           SizedBox(height: 15.sp,),
           AppText(
-            'Hàng điện tử, xin vui lòng nhẹ tay',
+            dataDetail.note??'',
             style: AppStyle.DEFAULT_16,
           ),
           SizedBox(height: 20.sp,)

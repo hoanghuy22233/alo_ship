@@ -49,10 +49,10 @@ class _ThongTinCaNhanState extends State<ThongTinCaNhan> {
       _profileController.getProfile((ProfileData res){
         ten.text = res.full_name??"";
         email.text = res.email??"";
-        ngaySinh.text = res.birthday??"";
+        ngaySinh.text = AppValue.formatStringDate(res.birthday!);
         bienSo.text = res.license_plate??"";
-        tinhThanh.text = res.province??"";
-        quanHuyen.text = res.district??"";
+        tinhThanh.text = res.province_name??"";
+        quanHuyen.text = res.district_name??"";
         diaChi.text = res.address??"";
       });
       _profileController.getProvince();
@@ -76,7 +76,6 @@ class _ThongTinCaNhanState extends State<ThongTinCaNhan> {
               padding: EdgeInsets.all(16.sp),
               child: Obx((){
                 if(_profileController.profile.value!=null){
-
                   final ns =ngaySinh.text!=""? ngaySinh.text.split('/'):AppValue.DATE_FORMAT.format(DateTime.now()).split("/");
                   final d = int.parse(ns[0]);
                   final m = int.parse(ns[1]);
@@ -281,8 +280,8 @@ class _ThongTinCaNhanState extends State<ThongTinCaNhan> {
                   Map<String,dynamic> data={
                     "full_name": ten.text,
                     "address": diaChi.text,
-                    "district": _profileController.districId==-1?"":_profileController.districId,
-                    "province": _profileController.provinceId==-1?"":_profileController.provinceId,
+                    "district": _profileController.districId,
+                    "province": _profileController.provinceId,
                     "license_plate": bienSo.text
                   };
                   if(ngaySinh.text!=""){
@@ -292,7 +291,17 @@ class _ThongTinCaNhanState extends State<ThongTinCaNhan> {
                     List<int> bytes=await avatar!.readAsBytes();
                     data["imageBase64"]=base64Encode(bytes);
                   }
-                  _profileController.updateProfile(data);
+                  _profileController.updateProfile(data,(){
+                    _profileController.getProfile((ProfileData res){
+                      ten.text = res.full_name??"";
+                      email.text = res.email??"";
+                      ngaySinh.text = AppValue.formatStringDate(res.birthday!);
+                      bienSo.text = res.license_plate??"";
+                      tinhThanh.text = res.province_name??"";
+                      quanHuyen.text = res.district_name??"";
+                      diaChi.text = res.address??"";
+                    });
+                  });
                 }
                 setState(() {
                   isSua = !isSua;

@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "16653490472",
+    "project_id": "aloship-2aa42",
+    "storage_bucket": "aloship-2aa42.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16653490472:android:ad4f1b7f44235f4bcf181d",
+        "android_client_info": {
+          "package_name": "com.android.app.alo_ship"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "16653490472-ci9t66k1u97lu5re9vpqa70mm4nueq85.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.app.alo_ship",
+            "certificate_hash": "ca2ebc08b7e83e0f66af030557a94756232c9b2b"
+          }
+        },
+        {
+          "client_id": "16653490472-c2uh6kjssh775hlc8lpqhtq6a00fofr0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRLGrPMlaPQ9Bw9gD7kf6jFVgHsatx3JU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "16653490472-c2uh6kjssh775hlc8lpqhtq6a00fofr0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "16653490472-1ke1aafol3st8ufj0ltouk0u106hs2au.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.aloShip"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

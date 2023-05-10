@@ -5,11 +5,13 @@ part 'profile_response.g.dart';
 
 @JsonSerializable()
 class ProfileData {
-  int? id;
-  String? user_code,full_name,phone,email,sex,avatar,address,license_plate,birthday,province,district;
+  int? id,district,province;
+  String? user_code,full_name,phone,email,sex,avatar,address,license_plate,birthday;
+  String? district_name,province_name;
 
 
   ProfileData({this.id, this.user_code, this.full_name, this.phone, this.email,
+    this.district_name,this.province_name,
     this.sex, this.avatar, this.address,this.license_plate,this.birthday,this.province,this.district});
 
   factory ProfileData.fromJson(Map<String, dynamic> json) =>
