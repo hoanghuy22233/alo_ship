@@ -25,7 +25,7 @@ class _ItemListHomeState extends State<ItemListHome> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        AppNavigator.navigateDetailOrder(widget.data.booking_code!);
+        AppNavigator.navigateDetailOrder(widget.data.booking_code!,widget.data.distance_user!);
       },
       child: Container(
         decoration: BoxDecoration(
@@ -56,7 +56,7 @@ class _ItemListHomeState extends State<ItemListHome> {
                         style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500),
                       ),
                       AppText(
-                        'Cách bạn ${widget.data.distance!.toStringAsFixed(1)} km',
+                        'Cách bạn ${widget.data.distance_user!.toStringAsFixed(1)} km',
                         style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w400,color: AppColors.grey7),
                       )
                     ],

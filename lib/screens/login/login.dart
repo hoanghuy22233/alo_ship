@@ -112,24 +112,24 @@ class _LoginState extends State<Login> {
                     SizedBox(
                       height: 24.sp,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AppText(
-                          'Chưa có tài khoản?'.tr,
-                          style: AppStyle.DEFAULT_16,
-                        ),
-                        InkWell(
-                          onTap: this.onClickDangKy,
-                          child: AppText(
-                            ' Đăng ký'.tr,
-                            style: AppStyle.DEFAULT_16.copyWith(
-                                color: AppColors.blue1,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                      ],
-                    )
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     AppText(
+                    //       'Chưa có tài khoản?'.tr,
+                    //       style: AppStyle.DEFAULT_16,
+                    //     ),
+                    //     InkWell(
+                    //       onTap: this.onClickDangKy,
+                    //       child: AppText(
+                    //         ' Đăng ký'.tr,
+                    //         style: AppStyle.DEFAULT_16.copyWith(
+                    //             color: AppColors.blue1,
+                    //             fontWeight: FontWeight.w500),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // )
                   ],
                 ),
               ),

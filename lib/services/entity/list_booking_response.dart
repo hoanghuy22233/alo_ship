@@ -7,7 +7,7 @@ part 'list_booking_response.g.dart';
 class ItemListBooking {
   int? id;
   String? booking_code,customer_code,shipper_code,type_flg,booking_name,payments_flg,created_date,status,status_name;
-  double? distance;
+  double? distance,distance_user;
   String? location_from,location_to;
   int? advance_money,shipping_fee,final_price;
 
@@ -28,6 +28,7 @@ class ItemListBooking {
       this.location_to,
       this.advance_money,
       this.shipping_fee,
+      this.distance_user,
       this.final_price);
 
   factory ItemListBooking.fromJson(Map<String, dynamic> json) =>

@@ -11,7 +11,7 @@ class AppNavigator {
   static navigateRegister() async => Get.toNamed(Routes.register);
   static navigateForgotPass() async => Get.toNamed(Routes.forgotPass);
   static navigateResetPass() async => Get.toNamed(Routes.resetPass);
-  static navigateDetailOrder(String code) async => Get.toNamed(Routes.detailOrder,arguments: code);
+  static navigateDetailOrder(String code,double distance_user) async => Get.toNamed(Routes.detailOrder,arguments: [code,distance_user]);
   static navigateMoreDetail(DetailBookingData dataDetail) async => Get.toNamed(Routes.moreDetail,arguments: dataDetail);
   static navigateHistoryTransfer() async => Get.toNamed(Routes.historyTransfer);
   static navigateNotification() async => Get.toNamed(Routes.notification);

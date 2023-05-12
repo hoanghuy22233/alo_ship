@@ -13,6 +13,7 @@ class DetailBookingData {
   int? advance_money,shipping_fee_admin,final_price,shipping_fee_shipper;
   String? created_date,status,status_name;
   String? location_from,location_to;
+  List<ItemStatusTime>? statusTimeBooking;
 
 
   DetailBookingData(
@@ -38,7 +39,8 @@ class DetailBookingData {
     this.status,
     this.status_name,
     this.location_from,
-    this.location_to
+    this.location_to,
+    this.statusTimeBooking
 });
 
   factory DetailBookingData.fromJson(Map<String, dynamic> json) =>
@@ -58,4 +60,17 @@ class DetailBookingResponse extends BaseResponse {
       _$DetailBookingResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$DetailBookingResponseToJson(this);
+}
+
+@JsonSerializable()
+class ItemStatusTime extends BaseResponse {
+  String? status_name,updated_date;
+
+
+  ItemStatusTime(this.status_name, this.updated_date);
+
+  factory ItemStatusTime.fromJson(Map<String, dynamic> json) =>
+      _$ItemStatusTimeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ItemStatusTimeToJson(this);
 }

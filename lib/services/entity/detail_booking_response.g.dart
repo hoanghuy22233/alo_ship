@@ -30,6 +30,9 @@ DetailBookingData _$DetailBookingDataFromJson(Map<String, dynamic> json) =>
       status_name: json['status_name'] as String?,
       location_from: json['location_from'] as String?,
       location_to: json['location_to'] as String?,
+      statusTimeBooking: (json['statusTimeBooking'] as List<dynamic>?)
+          ?.map((e) => ItemStatusTime.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$DetailBookingDataToJson(DetailBookingData instance) =>
@@ -56,6 +59,7 @@ Map<String, dynamic> _$DetailBookingDataToJson(DetailBookingData instance) =>
       'status_name': instance.status_name,
       'location_from': instance.location_from,
       'location_to': instance.location_to,
+      'statusTimeBooking': instance.statusTimeBooking,
     };
 
 DetailBookingResponse _$DetailBookingResponseFromJson(
@@ -76,4 +80,22 @@ Map<String, dynamic> _$DetailBookingResponseToJson(
       'message': instance.message,
       'datetime': instance.datetime,
       'payload': instance.payload,
+    };
+
+ItemStatusTime _$ItemStatusTimeFromJson(Map<String, dynamic> json) =>
+    ItemStatusTime(
+      json['status_name'] as String?,
+      json['updated_date'] as String?,
+    )
+      ..code = json['code'] as int?
+      ..message = json['message'] as String?
+      ..datetime = json['datetime'] as int?;
+
+Map<String, dynamic> _$ItemStatusTimeToJson(ItemStatusTime instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'message': instance.message,
+      'datetime': instance.datetime,
+      'status_name': instance.status_name,
+      'updated_date': instance.updated_date,
     };

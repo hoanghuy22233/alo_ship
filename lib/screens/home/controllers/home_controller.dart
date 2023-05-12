@@ -13,7 +13,6 @@ class HomeController extends BaseController{
     callApi<ListBookingResponse>(
         api: commonRepository.listBooking(),
         onSuccess: (res)async{
-          print("Dương ${res.payload}");
           dataBooking.value=res.payload!;
         }
     );

@@ -30,7 +30,8 @@ class DetailOrder extends StatefulWidget {
 class _DetailOrderState extends State<DetailOrder> {
   int type=1;
   DetailController _detailController=Get.find<DetailController>();
-  String booking_code=Get.arguments;
+  String booking_code=Get.arguments[0];
+  double distance_user=Get.arguments[1];
   HomeController _homeController=Get.find<HomeController>();
 
 
@@ -90,7 +91,7 @@ class _DetailOrderState extends State<DetailOrder> {
                               style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500),
                             ),
                             AppText(
-                              'Cách bạn ${dataDetail.distance!.toStringAsFixed(1)} km',
+                              'Cách bạn ${distance_user.toStringAsFixed(1)} km',
                               style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w400,color: AppColors.grey7),
                             )
                           ],

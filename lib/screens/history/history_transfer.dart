@@ -89,18 +89,30 @@ class _HistoryTransferState extends State<HistoryTransfer> with SingleTickerProv
                     borderRadius: BorderRadius.circular(10.sp),
                   ),
                   SizedBox(width: 15.sp,),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AppText(
-                        data.booking_name??'',
-                        style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500),
-                      ),
-                      AppText(
-                        data.status=="01"? 'Đang lấy hàng':data.status=="02"?"Đang giao":"Hoàn thành",
-                        style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500,color:data.status=="03"? AppColors.green:AppColors.orange),
-                      )
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppText(
+                          data.booking_name??'',
+                          style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500),
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: AppText(
+                                data.status=="01"? 'Đang lấy hàng':data.status=="02"?"Đang giao":"Hoàn thành",
+                                style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500,color:data.status=="03"? AppColors.green:AppColors.orange),
+                              ),
+                            ),
+                            AppText(
+                              AppValue.formatStringDateAndTime(data.updated_date??''),
+                              style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w400),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),

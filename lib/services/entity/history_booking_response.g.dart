@@ -19,6 +19,7 @@ ItemHistoryBooking _$ItemHistoryBookingFromJson(Map<String, dynamic> json) =>
       (json['distance'] as num?)?.toDouble(),
       json['shipping_fee_admin'] as int?,
       json['status'] as String?,
+      json['updated_date'] as String?,
       json['shipping_fee_shipper'] as int?,
     );
 
@@ -33,6 +34,7 @@ Map<String, dynamic> _$ItemHistoryBookingToJson(ItemHistoryBooking instance) =>
       'location_to': instance.location_to,
       'status_name': instance.status_name,
       'status': instance.status,
+      'updated_date': instance.updated_date,
       'distance': instance.distance,
       'shipping_fee_admin': instance.shipping_fee_admin,
       'shipping_fee_shipper': instance.shipping_fee_shipper,

@@ -67,7 +67,7 @@ abstract class AppRestClient {
       @Query('booking_code') String bookingCode
       );
 
-  @GET(Endpoint.detailBooking)
+  @GET(Endpoint.detailHistory)
   Future<DetailBookingResponse> getDetailHistory(
       @Query('booking_code') String bookingCode
       );

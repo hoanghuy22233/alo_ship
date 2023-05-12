@@ -6,7 +6,7 @@ part 'history_booking_response.g.dart';
 @JsonSerializable()
 class ItemHistoryBooking {
   int? id;
-  String? booking_code,customer_code,shipper_code,booking_name,location_from,location_to,status_name,status;
+  String? booking_code,customer_code,shipper_code,booking_name,location_from,location_to,status_name,status,updated_date;
   double? distance;
   int? shipping_fee_admin,shipping_fee_shipper;
 
@@ -23,6 +23,7 @@ class ItemHistoryBooking {
       this.distance,
       this.shipping_fee_admin,
       this.status,
+      this.updated_date,
       this.shipping_fee_shipper);
 
   factory ItemHistoryBooking.fromJson(Map<String, dynamic> json) =>

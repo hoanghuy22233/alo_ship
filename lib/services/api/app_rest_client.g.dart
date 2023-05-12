@@ -292,7 +292,7 @@ class _AppRestClient implements AppRestClient {
     )
             .compose(
               _dio.options,
-              '/api/user/detail-booking',
+              '/api/user/detail-history-booking',
               queryParameters: queryParameters,
               data: _data,
             )

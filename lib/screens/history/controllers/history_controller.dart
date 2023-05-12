@@ -26,6 +26,7 @@ class HistoryController extends BaseController{
     callApi<DetailBookingResponse>(
         api: commonRepository.getDetailHistory(bookingCode),
         onSuccess: (res)async{
+          print("Công hihi ${res.payload!}");
           detailHistory.value=res.payload!;
           if(onSuccess!=null) onSuccess(res.payload);
         },

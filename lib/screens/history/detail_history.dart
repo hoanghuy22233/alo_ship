@@ -134,9 +134,11 @@ class _DetailHistoryState extends State<DetailHistory> {
                       _thongTinNguoiDat(dataDetail),
                       DLine(),
                       SizedBox(height: 15.sp,),
-                      // Container(
-                      //   padding: EdgeInsets.symmetric(horizontal: 30.sp),
-                      //     child: itemInfo2(title: 'Thời gian hoàn thành', content: AppValue.formatStringDateAndTime(dataDetail.created_date!))),
+                      Column(
+                        children: List.generate(dataDetail.statusTimeBooking!.length, (index) => Container(
+                            padding: EdgeInsets.symmetric(horizontal: 30.sp),
+                            child: itemInfo2(title: dataDetail.statusTimeBooking![index].status_name??'', content: AppValue.formatStringDateAndTime(dataDetail.statusTimeBooking![index].updated_date??''))),),
+                      ),
                       Container(
                         padding: EdgeInsets.symmetric(vertical: 14.sp,horizontal: 15.sp),
                         margin: EdgeInsets.symmetric(horizontal: 30.sp,vertical: 15.sp),

@@ -23,6 +23,7 @@ ItemListBooking _$ItemListBookingFromJson(Map<String, dynamic> json) =>
       json['location_to'] as String?,
       json['advance_money'] as int?,
       json['shipping_fee'] as int?,
+      (json['distance_user'] as num?)?.toDouble(),
       json['final_price'] as int?,
     );
 
@@ -39,6 +40,7 @@ Map<String, dynamic> _$ItemListBookingToJson(ItemListBooking instance) =>
       'status': instance.status,
       'status_name': instance.status_name,
       'distance': instance.distance,
+      'distance_user': instance.distance_user,
       'location_from': instance.location_from,
       'location_to': instance.location_to,
       'advance_money': instance.advance_money,
