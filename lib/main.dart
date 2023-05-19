@@ -50,7 +50,7 @@ void main() {
       InitializationSettings(android: initializationSettingsAndroid);
     } else {
       var initializationSettingsIOS = DarwinInitializationSettings(requestSoundPermission: true);
-      final bool? result = await flutterLocalNotificationsPlugin
+      await flutterLocalNotificationsPlugin
           .resolvePlatformSpecificImplementation<
           IOSFlutterLocalNotificationsPlugin>()
           ?.requestPermissions(
