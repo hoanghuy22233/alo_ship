@@ -9,6 +9,7 @@ import 'package:sprint/screens/home/controllers/detail_controller.dart';
 import 'package:sprint/services/entity/detail_booking_response.dart';
 import 'package:sprint/widgets/app_base_page.dart';
 import 'package:sprint/widgets/app_header.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../generated/assets.dart';
 import '../../res/app_styles.dart';
@@ -127,7 +128,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                         child: Column(
                           children: [
                             itemInfo(title: 'Tên người nhận', content: dataDetail.receiver_name??''),
-                            itemInfo(title: 'Số điện thoại', content: dataDetail.receiver_phone??'')
+                            itemInfo(title: 'Số điện thoại', content: dataDetail.receiver_phone??'',textColor: AppColors.blue1,isCall: true)
                           ],
                         ),
                       ),
@@ -213,31 +214,55 @@ class _DetailHistoryState extends State<DetailHistory> {
     );
   }
 
-  Widget itemInfo({required String title,required String content,bool isBold=false,Color textColor=AppColors.BLACK}){
-    return Column(
-      children: [
-        SizedBox(height: 15.sp,),
-        Row(
-          children: [
-            AppText(
-              title,
-              style: AppStyle.DEFAULT_16,
-            ),
-            Spacer(),
-            AppText(
-              content,
-              style: AppStyle.DEFAULT_16.copyWith(fontWeight: isBold?FontWeight.bold:FontWeight.w400,color: textColor),
-            )
-          ],
-        ),
-        SizedBox(height: 15.sp,),
-        DLine()
-      ],
+  Widget itemInfo({required String title,required String content,bool isBold=false,Color textColor=AppColors.BLACK,bool isCall=false}){
+    return InkWell(
+      onTap: ()async{
+        if(isCall){
+          if (!await launchUrl(
+              Uri.parse('tel:${content}')
+          )) {
+            throw Exception('Could not launch');
+          }
+        }
+      },
+      child: Column(
+        children: [
+          SizedBox(height: 15.sp,),
+          Row(
+            children: [
+              AppText(
+                title,
+                style: AppStyle.DEFAULT_16,
+              ),
+              Spacer(),
+              AppText(
+                content,
+                style: AppStyle.DEFAULT_16.copyWith(
+                    fontWeight: isBold?FontWeight.bold:FontWeight.w400,
+                    color: textColor,
+                    decoration:isCall?TextDecoration.underline:TextDecoration.none
+                ),
+              )
+            ],
+          ),
+          SizedBox(height: 15.sp,),
+          DLine()
+        ],
+      ),
     );
   }
 
-  Widget itemInfo2({required String title,required String content,bool isBold=false}){
-    return Container(
+  Widget itemInfo2({required String title,required String content,bool isBold=false,bool isCall=false}){
+    return InkWell(
+      onTap: ()async{
+        if(isCall){
+          if (!await launchUrl(
+              Uri.parse('tel:${content}')
+          )) {
+            throw Exception('Could not launch');
+          }
+        }
+      },
       child: Row(
         children: [
           AppText(
@@ -247,7 +272,11 @@ class _DetailHistoryState extends State<DetailHistory> {
           Spacer(),
           AppText(
             content,
-            style: AppStyle.DEFAULT_16.copyWith(fontWeight: isBold?FontWeight.bold:FontWeight.w400),
+            style: AppStyle.DEFAULT_16.copyWith(
+                fontWeight: isBold?FontWeight.bold:FontWeight.w400,
+                color: isCall?AppColors.blue1:AppColors.BLACK,
+                decoration: isCall?TextDecoration.underline:TextDecoration.none
+            ),
           )
         ],
       ),
@@ -267,7 +296,7 @@ class _DetailHistoryState extends State<DetailHistory> {
           SizedBox(height: 15.sp,),
           itemInfo2(title: 'Tên người đặt', content: dataDetail.orderer_name??''),
           SizedBox(height: 15.sp,),
-          itemInfo2(title: 'Số điện thoại', content: dataDetail.orderer_user_phone??''),
+          itemInfo2(title: 'Số điện thoại', content: dataDetail.orderer_user_phone??'',isCall: true),
           SizedBox(height: 15.sp,),
           itemInfo2(title: 'Phí vận chuyển', content: 'Người nhận trả'),
           SizedBox(height: 15.sp,),
