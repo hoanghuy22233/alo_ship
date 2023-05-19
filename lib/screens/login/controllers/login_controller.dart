@@ -61,6 +61,7 @@ class LoginController extends BaseController{
     }
 
     final position = await _geolocatorPlatform.getCurrentPosition();
+    print("Công cục ${position.latitude}, ${position.longitude}");
     lat=position.latitude;
     lng=position.longitude;
   }

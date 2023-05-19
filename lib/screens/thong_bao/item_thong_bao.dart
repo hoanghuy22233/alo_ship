@@ -35,15 +35,21 @@ class _ItemThongBaoState extends State<ItemThongBao> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        _notificationController.readNotificaton(
-            id: widget.data.id!,
-            code: widget.data.notification_code!,
-            onSuccess: (){
-              setState(() {
-                seen=!seen;
-              });
-            }
-        );
+        if(widget.data.is_read==0&&seen==false){
+          _notificationController.readNotificaton(
+              id: widget.data.id!,
+              code: widget.data.notification_code!,
+              onSuccess: (){
+                if(widget.data.is_read==0)
+                {
+                  setState(() {
+                    seen=!seen;
+                  });
+                }
+              }
+          );
+        }
+
       },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 14.sp,horizontal: 16.sp),
