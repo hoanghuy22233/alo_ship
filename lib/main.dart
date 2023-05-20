@@ -50,12 +50,12 @@ void main() {
       InitializationSettings(android: initializationSettingsAndroid);
     } else {
       var initializationSettingsIOS = DarwinInitializationSettings(requestSoundPermission: true);
-      await flutterLocalNotificationsPlugin
-          .resolvePlatformSpecificImplementation<
-          IOSFlutterLocalNotificationsPlugin>()
-          ?.requestPermissions(
-        sound: true,
-      );
+      // await flutterLocalNotificationsPlugin
+      //     .resolvePlatformSpecificImplementation<
+      //     IOSFlutterLocalNotificationsPlugin>()
+      //     ?.requestPermissions(
+      //   sound: true,
+      // );
       initializationSettings =
       InitializationSettings(iOS: initializationSettingsIOS);
     }
