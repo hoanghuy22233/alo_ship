@@ -9,7 +9,7 @@ class DetailBookingData {
   int? id;
   String? booking_code,customer_code,shipper_code,booking_name,receiver_name,receiver_phone,orderer_name,orderer_user_phone,shipping_fee_type;
   String? shipping_fee_type_name,note;
-  double? distance;
+  double? distance_user;
   int? advance_money,shipping_fee_admin,final_price,shipping_fee_shipper;
   String? created_date,status,status_name;
   String? location_from,location_to;
@@ -30,7 +30,7 @@ class DetailBookingData {
     this.shipping_fee_type,
     this.shipping_fee_type_name,
     this.note,
-    this.distance,
+    this.distance_user,
     this.advance_money,
     this.shipping_fee_admin,
     this.shipping_fee_shipper,

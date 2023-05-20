@@ -56,7 +56,7 @@ class _MoreDetailState extends State<MoreDetail> {
                               style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500),
                             ),
                             AppText(
-                              'Cách bạn ${dataDetail.distance!.toStringAsFixed(1)} km',
+                              'Cách bạn ${dataDetail.distance_user!.toStringAsFixed(1)} km',
                               style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w400,color: AppColors.grey7),
                             )
                           ],
