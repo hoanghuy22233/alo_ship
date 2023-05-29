@@ -141,7 +141,12 @@ class _ItemListHomeState extends State<ItemListHome> {
                   ),
                   SizedBox(height: 12.sp,),
                   Container(height: 1,width: Get.width,color: AppColors.greyF2,),
-                  // SizedBox(height: 10.sp,),
+                  SizedBox(height: 10.sp,),
+                  AppText('Lưu ý :',style: AppStyle.DEFAULT_16.copyWith(color: AppColors.primary),),
+                  AppText(
+                    '${widget.data.note??''}',
+                    style: AppStyle.DEFAULT_14.copyWith(fontWeight: FontWeight.w400,color: AppColors.primary),
+                  ),
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   //   children: [
