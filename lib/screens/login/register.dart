@@ -6,6 +6,7 @@ import 'package:sprint/widgets/DButton.dart';
 import 'package:sprint/widgets/DInput.dart';
 import 'package:sprint/widgets/app_base_page.dart';
 import 'package:sprint/widgets/app_header.dart';
+import 'package:sprint/widgets/widget_dialog.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -67,6 +68,24 @@ class _RegisterState extends State<Register> {
   }
 
   onClickDangKy() {
-
+    if(_nameController.text!=''&&_emailController.text!=''&&_passController.text!=''&&_rePassController.text!=''){
+      NotificationDialog.createSimpleDialog(
+          context: context,
+          titleButton1: 'OK',
+          numberButton: 1,
+          title: 'Thông báo',
+          content: 'Bạn đã đăng ký thành công, tài khoản sẽ được xem xét và thông báo tới email của bạn.'
+      );
+    }
+    else{
+      NotificationDialog.createSimpleDialog(
+          context: context,
+          titleButton1: 'OK',
+          numberButton: 1,
+          type: 2,
+          title: 'Thông báo',
+          content: 'Hãy nhập đủ thông tin đăng ký!'
+      );
+    }
   }
 }

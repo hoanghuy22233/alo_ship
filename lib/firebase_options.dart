@@ -59,12 +59,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCTN4hLmuFyK76q8yUZnYPsIL3N8URunxc',
-    appId: '1:16653490472:ios:0660b29e1617bd1ecf181d',
+    appId: '1:16653490472:ios:e21814194c060c21cf181d',
     messagingSenderId: '16653490472',
     projectId: 'aloship-2aa42',
     storageBucket: 'aloship-2aa42.appspot.com',
-    androidClientId: '16653490472-ci9t66k1u97lu5re9vpqa70mm4nueq85.apps.googleusercontent.com',
-    iosClientId: '16653490472-jbjrjduclnq919gj9mlrd1bgvi56poj4.apps.googleusercontent.com',
-    iosBundleId: 'com.app.aloship99',
+    androidClientId: '16653490472-8apgl5lqrhldvog7k9glhsgp0v0714c6.apps.googleusercontent.com',
+    iosClientId: '16653490472-efj8k4p93qhcl10bkn4opitnrov6fkns.apps.googleusercontent.com',
+    iosBundleId: 'com.app.ios.aloship99',
   );
 }
