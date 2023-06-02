@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,7 @@ import 'package:sprint/widgets/widget_dialog.dart';
 import 'package:sprint/widgets/widget_handle.dart';
 
 import '../../res/colors.dart';
+import '../loading/splash.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -26,6 +28,13 @@ class _LoginState extends State<Login> {
   TextEditingController _passController = TextEditingController();
 
   LoginController _loginController = Get.find<LoginController>();
+
+
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,24 +121,24 @@ class _LoginState extends State<Login> {
                     SizedBox(
                       height: 24.sp,
                     ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     AppText(
-                    //       'Chưa có tài khoản?'.tr,
-                    //       style: AppStyle.DEFAULT_16,
-                    //     ),
-                    //     InkWell(
-                    //       onTap: this.onClickDangKy,
-                    //       child: AppText(
-                    //         ' Đăng ký'.tr,
-                    //         style: AppStyle.DEFAULT_16.copyWith(
-                    //             color: AppColors.blue1,
-                    //             fontWeight: FontWeight.w500),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // )
+                    fake==true? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AppText(
+                          'Chưa có tài khoản?'.tr,
+                          style: AppStyle.DEFAULT_16,
+                        ),
+                        InkWell(
+                          onTap: this.onClickDangKy,
+                          child: AppText(
+                            ' Đăng ký'.tr,
+                            style: AppStyle.DEFAULT_16.copyWith(
+                                color: AppColors.blue1,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ],
+                    ):SizedBox()
                   ],
                 ),
               ),
