@@ -12,6 +12,7 @@ import '../../res/app_styles.dart';
 import '../../res/colors.dart';
 import '../../widgets/app_text.dart';
 import '../../widgets/widget_dialog.dart';
+import '../loading/splash.dart';
 
 class MenuHome extends StatefulWidget {
   const MenuHome({Key? key}) : super(key: key);
@@ -21,7 +22,8 @@ class MenuHome extends StatefulWidget {
 }
 
 class _MenuHomeState extends State<MenuHome> {
-  final NotificationController _notificationController=Get.find<NotificationController>();
+  final NotificationController _notificationController = Get.find<
+      NotificationController>();
   List<TaiKhoanModel> arr = [
     TaiKhoanModel(
       icon: 'assets/icons/icThongTinCaNhan.svg',
@@ -62,19 +64,37 @@ class _MenuHomeState extends State<MenuHome> {
         Get.toNamed(Routes.doiMatKhau);
       },
     ),
+
   ];
 
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 0),(){
+    Future.delayed(const Duration(seconds: 0), () {
       _notificationController.getNotification();
+      if(fake==true)
+        arr.add(TaiKhoanModel(
+          icon: 'assets/icons/icDoiMatKhau.svg',
+          title: 'Xóa tài khoản'.tr,
+          press: () {
+            Get.back();
+            NotificationDialog.createSimpleDialog(
+                context: context,
+                titleButton1: 'OK',
+                type: 2,
+                content: 'Tài khoản của bạn sẽ được xem xét xóa bởi quản trị viên.',
+                numberButton: 1
+            );
+          },
+        ),);
     });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final viewPadding = MediaQuery.of(context).viewPadding;
+    final viewPadding = MediaQuery
+        .of(context)
+        .viewPadding;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -116,19 +136,21 @@ class _MenuHomeState extends State<MenuHome> {
         ),
         Expanded(
             child: SingleChildScrollView(
-              child: Obx((){
-                if(_notificationController.numberNotification.value!=0){
-                  arr[1]=TaiKhoanModel(
+              child: Obx(() {
+                if (_notificationController.numberNotification.value != 0) {
+                  arr[1] = TaiKhoanModel(
                       icon: 'assets/icons/icThongBao.svg',
                       title: 'Thông báo'.tr,
-                      rightText: '${_notificationController.numberNotification.value>9?'9+':_notificationController.numberNotification.value}',
+                      rightText: '${_notificationController.numberNotification
+                          .value > 9 ? '9+' : _notificationController
+                          .numberNotification.value}',
                       press: () {
                         Get.back();
                         AppNavigator.navigateNotification();
                       });
                 }
-                else{
-                  arr[1]=TaiKhoanModel(
+                else {
+                  arr[1] = TaiKhoanModel(
                       icon: 'assets/icons/icThongBao.svg',
                       title: 'Thông báo'.tr,
                       press: () {
@@ -138,17 +160,17 @@ class _MenuHomeState extends State<MenuHome> {
                 }
                 return Column(
                     children: List.generate(arr.length, (index) {
-                  return TaiKhoanItem(taiKhoanModel: arr[index]);
-                }));
+                      return TaiKhoanItem(taiKhoanModel: arr[index]);
+                    }));
               }),
             )),
         InkWell(
-          onTap: ()async{
+          onTap: () async {
             NotificationDialog.createSimpleDialog(
                 context: context,
                 titleButton1: 'OK',
                 titleButton2: "Hủy",
-                onTap1: ()async{
+                onTap1: () async {
                   Get.back();
                   await AppPref().removeString('TOKEN');
                   AppNavigator.navigateLogin();
