@@ -46,6 +46,7 @@ class BaseController extends GetxController implements WebServiceAPICallback {
       else {
         webServiceStateController.popLoading();
         String message = jsonDecode(jsonEncode(result))['message'];
+        print("error message ${message}");
         await NotificationDialog.createSimpleDialog(
             context: Get.context!,
             titleButton1: "OK",

@@ -13,7 +13,7 @@ class _AppRestClient implements AppRestClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://api.ship99.top/v1';
+    baseUrl ??= 'https://api.grapcar.top/v1';
   }
 
   final Dio _dio;
