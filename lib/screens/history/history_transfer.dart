@@ -5,6 +5,9 @@ import 'package:get/get.dart';
 import 'package:sprint/common/routes/navigator.dart';
 import 'package:sprint/res/app_styles.dart';
 import 'package:sprint/res/colors.dart';
+import 'package:sprint/screens/history/controllers/history_controller.dart';
+import 'package:sprint/screens/home/controllers/home_controller.dart';
+import 'package:sprint/services/entity/history_booking_response.dart';
 import 'package:sprint/widgets/app_base_page.dart';
 import 'package:sprint/widgets/app_header.dart';
 import 'package:sprint/widgets/app_text.dart';
@@ -23,10 +26,15 @@ class HistoryTransfer extends StatefulWidget {
 class _HistoryTransferState extends State<HistoryTransfer> with SingleTickerProviderStateMixin {
   TabController? _tabController;
   int indexTab=0;
+  HistoryController _historyController=Get.find<HistoryController>();
+  HomeController _homeController=Get.find<HomeController>();
 
   @override
   void initState() {
     _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
+    Future.delayed(Duration(seconds: 0),(){
+      _historyController.getHistoryTransfer();
+    });
   }
 
   @override
@@ -35,105 +43,30 @@ class _HistoryTransferState extends State<HistoryTransfer> with SingleTickerProv
       backgroundColor: AppColors.colorBg,
       child: Column(
         children: [
-          AppHeader(title: 'Lịch sử vận chuyển'),
-          _renderTopTab(),
-          Expanded(child: TabBarView(
-            controller: _tabController,
-            physics: NeverScrollableScrollPhysics(),
-            children: [
-              _renderListData(),
-              _renderListData(),
-              _renderListData(),
-            ],
-          ))
+          AppHeader(title: 'Lịch sử vận chuyển',onBack: (){
+            AppNavigator.navigateHome();
+            _homeController.listBooking();
+          },),
+          // _renderTopTab(),
+          // Expanded(child: TabBarView(
+          //   controller: _tabController,
+          //   physics: NeverScrollableScrollPhysics(),
+          //   children: [
+          //     _renderListData(),
+          //     _renderListData(),
+          //     _renderListData(),
+          //   ],
+          // )),
+          Expanded(child: _renderListData()),
         ],
       ),
     );
   }
 
-  Widget _renderTopTab(){
-    return Container(
-      width: Get.width,
-      margin: EdgeInsets.symmetric(horizontal: 15.sp,vertical: 20.sp),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          InkWell(
-            onTap: (){
-              _tabController!.animateTo(0);
-              setState(() {
-                indexTab=0;
-              });
-
-            },
-            child: Container(
-              width: (Get.width-50.sp)/3,
-              decoration: BoxDecoration(
-                color: indexTab==0?AppColors.red1:AppColors.WHITE,
-                borderRadius: BorderRadius.circular(5.sp)
-              ),
-              padding: EdgeInsets.symmetric(vertical: 9.sp),
-              child: AppText(
-                'Tất cả',
-                textAlign: TextAlign.center,
-                style: AppStyle.DEFAULT_16.copyWith(fontWeight: indexTab==0?FontWeight.w600:FontWeight.w400,color: indexTab==0?AppColors.WHITE:AppColors.BLACK,height: 1.3),
-              ),
-            ),
-          ),
-          SizedBox(width: 10.sp,),
-          InkWell(
-            onTap: (){
-              setState(() {
-                indexTab=1;
-              });
-              _tabController!.animateTo(1);
-            },
-            child: Container(
-              width: (Get.width-50.sp)/3,
-              decoration: BoxDecoration(
-                  color: indexTab==1?AppColors.red1:AppColors.WHITE,
-                  borderRadius: BorderRadius.circular(5.sp)
-              ),
-
-              padding: EdgeInsets.symmetric(vertical: 9.sp),
-              child: AppText(
-                'Đang thực hiện',
-                textAlign: TextAlign.center,
-                style: AppStyle.DEFAULT_16.copyWith(fontWeight: indexTab==1?FontWeight.w600:FontWeight.w400,color: indexTab==1?AppColors.WHITE:AppColors.BLACK,height: 1.3),
-              ),
-            ),
-          ),
-          SizedBox(width: 10.sp,),
-          InkWell(
-            onTap: (){
-              _tabController!.animateTo(2);
-              setState(() {
-                indexTab=2;
-              });
-            },
-            child: Container(
-              width: (Get.width-50.sp)/3,
-              decoration: BoxDecoration(
-                  color: indexTab==2?AppColors.red1:AppColors.WHITE,
-                  borderRadius: BorderRadius.circular(5.sp)
-              ),
-              padding: EdgeInsets.symmetric(vertical: 9.sp),
-              child: AppText(
-                'Hoàn thành',
-                textAlign: TextAlign.center,
-                style: AppStyle.DEFAULT_16.copyWith(fontWeight: indexTab==2?FontWeight.w600:FontWeight.w400,color: indexTab==2?AppColors.WHITE:AppColors.BLACK,height: 1.3),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _renderItemList(){
+  Widget _renderItemList(ItemHistoryBooking data){
     return InkWell(
       onTap: (){
-        AppNavigator.navigateMoreDetail();
+        AppNavigator.navigateDetailHistory(data.booking_code!);
       },
       child: Container(
         decoration: BoxDecoration(
@@ -156,18 +89,30 @@ class _HistoryTransferState extends State<HistoryTransfer> with SingleTickerProv
                     borderRadius: BorderRadius.circular(10.sp),
                   ),
                   SizedBox(width: 15.sp,),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AppText(
-                        'Đơn hàng giao hàng (Hỏa tốc)',
-                        style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500),
-                      ),
-                      AppText(
-                        'Hoàn thành',
-                        style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500,color: AppColors.green),
-                      )
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppText(
+                          data.booking_name??'',
+                          style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500),
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: AppText(
+                                data.status=="01"? 'Đang lấy hàng':data.status=="02"?"Đang giao":"Hoàn thành",
+                                style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500,color:data.status=="03"? AppColors.green:AppColors.orange),
+                              ),
+                            ),
+                            AppText(
+                              AppValue.formatStringDateAndTime(data.updated_date??''),
+                              style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w400),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -186,7 +131,7 @@ class _HistoryTransferState extends State<HistoryTransfer> with SingleTickerProv
                   ),
                   SizedBox(height: 5.sp,),
                   AppText(
-                    '5 ngõ 411 Đ. Trường Chinh,  Đống Đa, Hà Nội',
+                    data.location_from??'',
                     style: AppStyle.DEFAULT_14.copyWith(fontWeight: FontWeight.w400),
                   ),
                   SizedBox(height: 5.sp,),
@@ -196,7 +141,7 @@ class _HistoryTransferState extends State<HistoryTransfer> with SingleTickerProv
                   ),
                   SizedBox(height: 5.sp,),
                   AppText(
-                    '173 Yên Lãng, Thịnh Quang, Đống Đa, Hà Nội',
+                    data.location_to??'---',
                     style: AppStyle.DEFAULT_14.copyWith(fontWeight: FontWeight.w400),
                   ),
                   SizedBox(height: 12.sp,),
@@ -206,11 +151,11 @@ class _HistoryTransferState extends State<HistoryTransfer> with SingleTickerProv
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       AppText(
-                        'Mã đơn: ABC 123456',
+                        'Phí vận chuyển',
                         style: AppStyle.DEFAULT_16,
                       ),
                       AppText(
-                        AppValue.format_money(20000),
+                          data.shipping_fee_admin!=0? AppValue.format_money(data.status=='03'?data.shipping_fee_shipper!.toDouble() : data.shipping_fee_admin!.toDouble()):'---',
                         style: AppStyle.DEFAULT_16.copyWith(color: AppColors.red1,fontWeight: FontWeight.w600),
                       )
                     ],
@@ -225,14 +170,21 @@ class _HistoryTransferState extends State<HistoryTransfer> with SingleTickerProv
   }
 
   Widget _renderListData(){
-    return ListView.builder(
-      itemCount: 10,
-      shrinkWrap: true,
-      padding: EdgeInsets.symmetric(horizontal: 15.sp),
-      itemBuilder: (context, index) {
-        return _renderItemList();
-      },
-    );
+    return Obx((){
+      if(_historyController.listHistory!.value.isNotEmpty){
+        return ListView.builder(
+          itemCount: _historyController.listHistory!.value.length,
+          shrinkWrap: true,
+          padding: EdgeInsets.only(left: 15.sp,right: 15.sp,top: 15.sp),
+          itemBuilder: (context, index) {
+            return _renderItemList(_historyController.listHistory!.value[index]);
+          },
+        );
+      }
+      else{
+        return Center(child: AppText('Chưa có dữ liệu',style: AppStyle.DEFAULT_16.copyWith(fontStyle: FontStyle.italic),),);
+      }
+    });
   }
 
 }

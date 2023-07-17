@@ -22,4 +22,5 @@ class AppColors {
   static final greyF5 =const Color(0xffF5F5F5);
   static final greyF2 =const Color(0xffF2F2F2);
   static final colorBg =const Color(0xffF5F7FB);
+  static final orange =const Color(0xffD79D00);
 }

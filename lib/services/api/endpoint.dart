@@ -1,13 +1,20 @@
 class Endpoint {
   Endpoint._();
 
-  static const BASE_URL = 'https://ship99.top';
+  static const BASE_URL = 'https://api.grapcar.top/v1';
   static const login = '/api/user/login';
   static const profile = '/api/user/profile';
   static const update_profile = '/api/user/update-info-user';
   static const province = '/api/user/list-province';
   static const district = '/api/user/list-district';
   static const changePass = '/api/user/change-password';
+  static const listBooking = '/api/user/list-bookings';
+  static const notification = '/api/user/list-notification';
+  static const detailBooking = '/api/user/detail-booking';
+  static const updateStatus = '/api/user/update-status-booking';
+  static const historyBooking = '/api/user/list-history-bookings';
+  static const detailHistory = '/api/user/detail-history-booking';
+  static const readNotification = '/api/user/update-read-notification';
 
 
   static const int DEFAULT_LIMIT = 20;

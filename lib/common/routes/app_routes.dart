@@ -16,4 +16,5 @@ abstract class Routes {
   static const doiMatKhau = '/doiMatKhau';
   static const dieuKhoanChinhSach = '/dieuKhoanChinhSach';
   static const notification = '/notification';
+  static const detailHistory = '/detailHistory';
 }

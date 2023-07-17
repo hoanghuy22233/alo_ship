@@ -9,9 +9,10 @@ import '../res/colors.dart';
 import 'app_text.dart';
 
 class AppHeader extends StatelessWidget {
-  AppHeader({Key? key,required this.title,this.right}) : super(key: key);
+  AppHeader({Key? key,required this.title,this.right,this.onBack}) : super(key: key);
   String title;
   Widget? right;
+  Function? onBack;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,11 @@ class AppHeader extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: (){
-              Get.back();
+              if(onBack!=null) {
+                onBack!();
+              } else {
+                Get.back();
+              }
             },
             child: Container(
               padding: EdgeInsets.only(left: 15.sp,right: 5.sp,top: 5.sp,bottom: 5.sp),

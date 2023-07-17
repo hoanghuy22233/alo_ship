@@ -56,6 +56,14 @@ dependencies:
   build_runner: ^2.3.3
   retrofit_generator: ^4.2.0
   json_serializable: ^6.6.1
+  geolocator: ^9.0.2
+  firebase_messaging: ^14.5.0
+  firebase_core: ^2.11.0
+  flutter_local_notifications: ^14.0.0+1
+  firebase_analytics: ^10.3.0
+  vibration: ^1.7.7
+  url_launcher: ^6.1.11
+  permission_handler: ^10.2.0
 
 dev_dependencies:
   flutter_test:

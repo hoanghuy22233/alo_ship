@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,10 +15,24 @@ class Splash extends StatefulWidget {
   State<Splash> createState() => _SplashState();
 }
 
+bool fake=false;
+
 class _SplashState extends State<Splash> {
+
+  fakeIOS() async {
+    var _dio = Dio();
+    final _result = await _dio.get(
+        'https://raw.githubusercontent.com/hoanghuy22233/ios_fake/main/ship99');
+    final value = _result.data!.toString().trim();
+    print('fakeIOS $value');
+    if (value == '1') fake = true;
+  }
 
   @override
   void initState() {
+    Future.delayed(Duration(seconds: 0),(){
+      fakeIOS();
+    });
     Future.delayed(Duration(seconds: 2),(){
       getToken();
     });

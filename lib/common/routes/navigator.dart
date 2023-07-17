@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sprint/services/entity/detail_booking_response.dart';
 import 'app_pages.dart';
 
 class AppNavigator {
@@ -10,8 +11,9 @@ class AppNavigator {
   static navigateRegister() async => Get.toNamed(Routes.register);
   static navigateForgotPass() async => Get.toNamed(Routes.forgotPass);
   static navigateResetPass() async => Get.toNamed(Routes.resetPass);
-  static navigateDetailOrder() async => Get.toNamed(Routes.detailOrder);
-  static navigateMoreDetail() async => Get.toNamed(Routes.moreDetail);
+  static navigateDetailOrder(String code,double distance_user) async => Get.toNamed(Routes.detailOrder,arguments: [code,distance_user]);
+  static navigateMoreDetail(DetailBookingData dataDetail) async => Get.toNamed(Routes.moreDetail,arguments: dataDetail);
   static navigateHistoryTransfer() async => Get.toNamed(Routes.historyTransfer);
   static navigateNotification() async => Get.toNamed(Routes.notification);
+  static navigateDetailHistory(String bookingCode) async => Get.toNamed(Routes.detailHistory,arguments: bookingCode);
 }

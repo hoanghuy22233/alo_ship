@@ -12,18 +12,22 @@ ProfileData _$ProfileDataFromJson(Map<String, dynamic> json) => ProfileData(
       full_name: json['full_name'] as String?,
       phone: json['phone'] as String?,
       email: json['email'] as String?,
+      district_name: json['district_name'] as String?,
+      province_name: json['province_name'] as String?,
       sex: json['sex'] as String?,
       avatar: json['avatar'] as String?,
       address: json['address'] as String?,
       license_plate: json['license_plate'] as String?,
       birthday: json['birthday'] as String?,
-      province: json['province'] as String?,
-      district: json['district'] as String?,
+      province: json['province'] as int?,
+      district: json['district'] as int?,
     );
 
 Map<String, dynamic> _$ProfileDataToJson(ProfileData instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'district': instance.district,
+      'province': instance.province,
       'user_code': instance.user_code,
       'full_name': instance.full_name,
       'phone': instance.phone,
@@ -33,8 +37,8 @@ Map<String, dynamic> _$ProfileDataToJson(ProfileData instance) =>
       'address': instance.address,
       'license_plate': instance.license_plate,
       'birthday': instance.birthday,
-      'province': instance.province,
-      'district': instance.district,
+      'district_name': instance.district_name,
+      'province_name': instance.province_name,
     };
 
 ProfileResponse _$ProfileResponseFromJson(Map<String, dynamic> json) =>

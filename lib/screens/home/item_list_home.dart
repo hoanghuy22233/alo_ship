@@ -7,11 +7,14 @@ import 'package:sprint/generated/assets.dart';
 import 'package:sprint/res/app_styles.dart';
 import 'package:sprint/res/app_values.dart';
 import 'package:sprint/res/colors.dart';
+import 'package:sprint/services/entity/list_booking_response.dart';
 import 'package:sprint/widgets/app_text.dart';
 import 'package:sprint/widgets/widget_handle.dart';
 
 class ItemListHome extends StatefulWidget {
-  const ItemListHome({Key? key}) : super(key: key);
+  ItemListHome({Key? key,required this.data}) : super(key: key);
+
+  ItemListBooking data;
 
   @override
   State<ItemListHome> createState() => _ItemListHomeState();
@@ -22,7 +25,7 @@ class _ItemListHomeState extends State<ItemListHome> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        AppNavigator.navigateDetailOrder();
+        AppNavigator.navigateDetailOrder(widget.data.booking_code!,widget.data.distance_user!);
       },
       child: Container(
         decoration: BoxDecoration(
@@ -49,11 +52,11 @@ class _ItemListHomeState extends State<ItemListHome> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AppText(
-                        'Đơn hàng giao hàng (Hỏa tốc)',
+                        widget.data.booking_name??'',
                         style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w500),
                       ),
                       AppText(
-                        'Cách bạn 1.3 km',
+                        'Cách bạn ${widget.data.distance_user!.toStringAsFixed(1)} km',
                         style: AppStyle.DEFAULT_16.copyWith(fontWeight: FontWeight.w400,color: AppColors.grey7),
                       )
                     ],
@@ -69,52 +72,52 @@ class _ItemListHomeState extends State<ItemListHome> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 15.sp,),
-                  Row(
-                    children: [
-                      SvgPicture.asset(
-                        Assets.iconsIcMarker,
-                        width: 18.sp,
-                        height: 18.sp,
-                        fit: BoxFit.contain,
-                      ),
-                      SizedBox(width: 9.sp,),
-                      Expanded(
-                        child: AppText(
-                          '4 điểm đến khác',
-                          style: AppStyle.DEFAULT_14,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(5.sp),
-                        child: SvgPicture.asset(
-                          Assets.iconsIcNext,
-                          width: 15.sp,
-                          height: 15.sp,
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-
-                    ],
-                  ),
-                  SizedBox(height: 15.sp,),
-                  Container(height: 1,width: Get.width,color: AppColors.greyF2,),
-                  SizedBox(height: 15.sp,),
+                  // Row(
+                  //   children: [
+                  //     SvgPicture.asset(
+                  //       Assets.iconsIcMarker,
+                  //       width: 18.sp,
+                  //       height: 18.sp,
+                  //       fit: BoxFit.contain,
+                  //     ),
+                  //     SizedBox(width: 9.sp,),
+                  //     Expanded(
+                  //       child: AppText(
+                  //         '${widget.data.locations!.length-2} điểm đến khác',
+                  //         style: AppStyle.DEFAULT_14,
+                  //       ),
+                  //     ),
+                  //     Padding(
+                  //       padding: EdgeInsets.all(5.sp),
+                  //       child: SvgPicture.asset(
+                  //         Assets.iconsIcNext,
+                  //         width: 15.sp,
+                  //         height: 15.sp,
+                  //         fit: BoxFit.contain,
+                  //       ),
+                  //     ),
+                  //
+                  //   ],
+                  // ),
+                  // SizedBox(height: 15.sp,),
+                  // Container(height: 1,width: Get.width,color: AppColors.greyF2,),
+                  // SizedBox(height: 15.sp,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       AppText(
-                        'Tiền ứng',
+                        'Điểm đi',
                         style: AppStyle.DEFAULT_16,
                       ),
-                      AppText(
-                        AppValue.format_money(4000000),
-                        style: AppStyle.DEFAULT_18.copyWith(fontWeight: FontWeight.w500,color: Color(0xffFF0000)),
-                      )
+                      // AppText(
+                      //   AppValue.format_money(widget.data.advance_money!.toDouble()),
+                      //   style: AppStyle.DEFAULT_18.copyWith(fontWeight: FontWeight.w500,color: Color(0xffFF0000)),
+                      // )
                     ],
                   ),
                   SizedBox(height: 5.sp,),
                   AppText(
-                    '5 ngõ 411 Đ. Trường Chinh,  Đống Đa, Hà Nội',
+                    '${widget.data.location_from}',
                     style: AppStyle.DEFAULT_14.copyWith(fontWeight: FontWeight.w400),
                   ),
                   SizedBox(height: 5.sp,),
@@ -122,36 +125,41 @@ class _ItemListHomeState extends State<ItemListHome> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       AppText(
-                        'Tiền ship',
+                        'Điểm đến',
                         style: AppStyle.DEFAULT_16,
                       ),
-                      AppText(
-                        AppValue.format_money(10000),
-                        style: AppStyle.DEFAULT_18.copyWith(fontWeight: FontWeight.w500,color: AppColors.green),
-                      )
+                      // AppText(
+                      //   AppValue.format_money(widget.data.shipping_fee!.toDouble()),
+                      //   style: AppStyle.DEFAULT_18.copyWith(fontWeight: FontWeight.w500,color: AppColors.green),
+                      // )
                     ],
                   ),
                   SizedBox(height: 5.sp,),
                   AppText(
-                    '173 Yên Lãng, Thịnh Quang, Đống Đa, Hà Nội',
+                    '${widget.data.location_to??'Chưa có'}',
                     style: AppStyle.DEFAULT_14.copyWith(fontWeight: FontWeight.w400),
                   ),
                   SizedBox(height: 12.sp,),
                   Container(height: 1,width: Get.width,color: AppColors.greyF2,),
                   SizedBox(height: 10.sp,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      AppText(
-                        'Khoảng cách',
-                        style: AppStyle.DEFAULT_14,
-                      ),
-                      AppText(
-                        '0.5 km',
-                        style: AppStyle.DEFAULT_14,
-                      )
-                    ],
+                  AppText('Lưu ý :',style: AppStyle.DEFAULT_16.copyWith(color: AppColors.primary),),
+                  AppText(
+                    '${widget.data.note??''}',
+                    style: AppStyle.DEFAULT_14.copyWith(fontWeight: FontWeight.w400,color: AppColors.primary),
                   ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     AppText(
+                  //       'Tiền ship',
+                  //       style: AppStyle.DEFAULT_14,
+                  //     ),
+                  //     AppText(
+                  //       '${AppValue.format_money(widget.data.shipping_fee!.toDouble())}',
+                  //       style: AppStyle.DEFAULT_18.copyWith(fontWeight: FontWeight.w500,color: AppColors.green)
+                  //     )
+                  //   ],
+                  // ),
                   SizedBox(height: 15.sp,),
                   InkWell(
                     child: Container(

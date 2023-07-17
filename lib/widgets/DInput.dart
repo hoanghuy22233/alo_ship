@@ -10,6 +10,7 @@ class DInput extends StatelessWidget {
       required this.controller,
       this.isPass = false,
         this.readOnly=false,
+        this.keyboardType,
       this.rightPadding})
       : super(key: key);
 
@@ -18,6 +19,7 @@ class DInput extends StatelessWidget {
   bool isPass;
   double? rightPadding;
   bool readOnly;
+  TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +41,7 @@ class DInput extends StatelessWidget {
         child: TextField(
           controller: controller,
           obscureText: isPass,
+          keyboardType: keyboardType??TextInputType.text,
           decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
                   top: 14.sp,
