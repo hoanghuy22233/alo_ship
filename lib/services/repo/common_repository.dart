@@ -54,6 +54,11 @@ class CommonRepository extends AppCommonRepository {
     return client.listBooking();
   }
 
+  Future<ListBookingResponse> updateLocation(Map<String,dynamic> data) async {
+    final client = AppRestClient(dio);
+    return client.updateLocation(data);
+  }
+
   Future<NotificationResponse> getNotification() async {
     final client = AppRestClient(dio);
     return client.getNotification();

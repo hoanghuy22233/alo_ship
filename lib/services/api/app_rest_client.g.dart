@@ -13,7 +13,7 @@ class _AppRestClient implements AppRestClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://api.grapcar.top/v1';
+    baseUrl ??= 'https://api.ship99.top/v1/';
   }
 
   final Dio _dio;
@@ -224,6 +224,30 @@ class _AppRestClient implements AppRestClient {
             .compose(
               _dio.options,
               '/api/user/list-bookings',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ListBookingResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ListBookingResponse> updateLocation(data) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(data);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ListBookingResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/user/update-localtion',
               queryParameters: queryParameters,
               data: _data,
             )

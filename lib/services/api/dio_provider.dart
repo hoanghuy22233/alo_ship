@@ -14,7 +14,7 @@ class DioProvider {
         AppStrings.content_type: AppStrings.application_json
       }
       ..options.followRedirects = false
-      ..options.validateStatus =   (status) { return status! < 500; }
+      // ..options.validateStatus =   (status) { return status! < 500; }
       ..interceptors.add(LogInterceptor(
         request: false,
         responseBody: false,

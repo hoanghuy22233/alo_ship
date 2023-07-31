@@ -59,6 +59,11 @@ abstract class AppRestClient {
   @GET(Endpoint.listBooking)
   Future<ListBookingResponse> listBooking();
 
+  @POST(Endpoint.updateLocation)
+  Future<ListBookingResponse> updateLocation(
+      @Body() Map<String,dynamic> data
+      );
+
   @GET(Endpoint.notification)
   Future<NotificationResponse> getNotification();
 

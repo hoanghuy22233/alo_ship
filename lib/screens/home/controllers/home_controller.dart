@@ -17,4 +17,14 @@ class HomeController extends BaseController{
         }
     );
   }
+
+  updateLocation(Map<String,dynamic> data)async{
+    callApiNotLoading<ListBookingResponse>(
+        api: commonRepository.updateLocation(data),
+        onSuccess: (res)async{
+          dataBooking.value=res.payload!;
+          update();
+        }
+    );
+  }
 }

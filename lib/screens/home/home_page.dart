@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -6,6 +8,7 @@ import 'package:sprint/res/colors.dart';
 import 'package:sprint/screens/home/controllers/home_controller.dart';
 import 'package:sprint/screens/home/header_home.dart';
 import 'package:sprint/screens/home/item_list_home.dart';
+import 'package:sprint/screens/login/controllers/login_controller.dart';
 import 'package:sprint/services/entity/profile_response.dart';
 import 'package:sprint/widgets/DButton.dart';
 import 'package:sprint/widgets/app_base_page.dart';
@@ -23,6 +26,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   HomeController _homeController=Get.find<HomeController>();
   ProfileController _profileController = Get.find<ProfileController>();
+  LoginController _loginController = Get.find<LoginController>();
   ScrollController _scrollController=ScrollController();
 
   @override
@@ -31,6 +35,20 @@ class _HomePageState extends State<HomePage> {
       _homeController.listBooking();
       _profileController.getProfile((ProfileData res){
 
+      });
+
+    });
+    Future.delayed(Duration(seconds: 9),(){
+      Timer.periodic(new Duration(seconds: 9), (timer) {
+        _loginController.getCurrentPosition();
+      });
+    });
+    Future.delayed(Duration(seconds: 10),(){
+      Timer.periodic(new Duration(seconds: 10), (timer) {
+        _homeController.updateLocation({
+          "lat":_loginController.lat,
+          "long":_loginController.lng
+        });
       });
     });
     super.initState();

@@ -53,7 +53,7 @@ class LoginController extends BaseController{
     return true;
   }
 
-  Future<void> _getCurrentPosition() async {
+  Future<void> getCurrentPosition() async {
     final hasPermission = await _handlePermission();
 
     if (!hasPermission) {
@@ -69,7 +69,7 @@ class LoginController extends BaseController{
 
   @override
   void onReady() async{
-    await _getCurrentPosition();
+    await getCurrentPosition();
     await getToken();
     super.onReady();
   }
@@ -92,7 +92,10 @@ class LoginController extends BaseController{
         onSuccess: (res)async{
           await AppPref().saveString('TOKEN', res.payload!.token!);
           AppNavigator.navigateHome();
-        }
+        },
+      onError: (e){
+          print("Error login ${e}");
+      }
     );
   }
 }

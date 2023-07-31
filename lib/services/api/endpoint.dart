@@ -1,7 +1,7 @@
 class Endpoint {
   Endpoint._();
 
-  static const BASE_URL = 'https://api.grapcar.top/v1';
+  static const BASE_URL = 'https://api.ship99.top/v1/';
   static const login = '/api/user/login';
   static const profile = '/api/user/profile';
   static const update_profile = '/api/user/update-info-user';
@@ -9,6 +9,7 @@ class Endpoint {
   static const district = '/api/user/list-district';
   static const changePass = '/api/user/change-password';
   static const listBooking = '/api/user/list-bookings';
+  static const updateLocation = '/api/user/update-localtion';
   static const notification = '/api/user/list-notification';
   static const detailBooking = '/api/user/detail-booking';
   static const updateStatus = '/api/user/update-status-booking';
